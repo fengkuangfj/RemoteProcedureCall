@@ -1,0 +1,16 @@
+[
+     uuid("4556509F-618A-46CF-AB3D-ED736ED66477"),
+     version(1.0)
+]
+
+interface RpcServerInterface
+{
+	typedef enum _RPC_SERVER_STATUS
+	{
+		RPC_SERVER_STATUS_SUCCESS,
+		RPC_SERVER_STATUS_FAILED
+	} RPC_SERVER_STATUS, *PRPC_SERVER_STATUS, *LPRPC_SERVER_STATUS;
+
+     RPC_SERVER_STATUS TestInterface([in,string]unsigned char * puch);
+     RPC_SERVER_STATUS StopRpcServer(void);  
+}
