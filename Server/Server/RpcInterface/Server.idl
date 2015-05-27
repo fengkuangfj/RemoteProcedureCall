@@ -11,6 +11,6 @@ interface RpcServerInterface
 		RPC_SERVER_STATUS_FAILED
 	} RPC_SERVER_STATUS, *PRPC_SERVER_STATUS, *LPRPC_SERVER_STATUS;
 
-     RPC_SERVER_STATUS TestInterface([in,string]unsigned char * puch);
-     RPC_SERVER_STATUS StopRpcServer(void);  
+     RPC_SERVER_STATUS RpcTest([in,string]unsigned char * puch);
+     RPC_SERVER_STATUS RpcStop(void);  
 }

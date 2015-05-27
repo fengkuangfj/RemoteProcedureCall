@@ -30,6 +30,12 @@
     <ClInclude Include="..\..\Server\Server\RpcInterface\server.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Comm\Public.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Test.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -42,6 +48,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Server\Server\RpcInterface\server_c.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Test.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Wed May 27 19:21:23 2015
+/* at Wed May 27 20:24:17 2015
  */
 /* Compiler settings for Server.idl:
     Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
@@ -108,7 +108,7 @@ static const Server_MIDL_PROC_FORMAT_STRING Server__MIDL_ProcFormatString =
         0,
         {
 
-	/* Procedure TestInterface */
+	/* Procedure RpcTest */
 
 			0x32,		/* FC_BIND_PRIMITIVE */
 			0x48,		/* Old Flags:  */
@@ -138,7 +138,7 @@ static const Server_MIDL_PROC_FORMAT_STRING Server__MIDL_ProcFormatString =
 /* 34 */	0xd,		/* FC_ENUM16 */
 			0x0,		/* 0 */
 
-	/* Procedure StopRpcServer */
+	/* Procedure RpcStop */
 
 /* 36 */	0x32,		/* FC_BIND_PRIMITIVE */
 			0x48,		/* Old Flags:  */
@@ -226,8 +226,8 @@ static const RPC_DISPATCH_TABLE RpcServerInterface_v1_0_DispatchTable =
 
 static const SERVER_ROUTINE RpcServerInterface_ServerRoutineTable[] = 
     {
-    (SERVER_ROUTINE)TestInterface,
-    (SERVER_ROUTINE)StopRpcServer
+    (SERVER_ROUTINE)RpcTest,
+    (SERVER_ROUTINE)RpcStop
     };
 
 static const MIDL_SERVER_INFO RpcServerInterface_ServerInfo = 

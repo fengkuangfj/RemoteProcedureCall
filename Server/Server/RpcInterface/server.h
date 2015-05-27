@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Wed May 27 19:21:23 2015
+/* at Wed May 27 20:24:17 2015
  */
 /* Compiler settings for Server.idl:
     Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
@@ -62,10 +62,10 @@ typedef enum _RPC_SERVER_STATUS *PRPC_SERVER_STATUS;
 
 typedef enum _RPC_SERVER_STATUS *LPRPC_SERVER_STATUS;
 
-RPC_SERVER_STATUS TestInterface( 
+RPC_SERVER_STATUS RpcTest( 
     /* [string][in] */ unsigned char *puch);
 
-RPC_SERVER_STATUS StopRpcServer( void);
+RPC_SERVER_STATUS RpcStop( void);
 
 
 extern handle_t RpcServerInterface_Binding;

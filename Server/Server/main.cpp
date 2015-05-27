@@ -20,12 +20,12 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	do 
 	{
-		_tcscat_s(tchProtseq, _countof(tchProtseq), _T("ncalrpc"));
-		_tcscat_s(tchEndpoint, _countof(tchEndpoint), RPC_SERVER_END_POINT);
+		_tcscat_s(tchProtseq, _countof(tchProtseq), RPC_PROT_SEQ);
+		_tcscat_s(tchEndpoint, _countof(tchEndpoint), RPC_END_POINT);
 
 		RpcIfHandle = RpcServerInterface_v1_0_s_ifspec;
 
-		PublicServer.Init(
+		if (!PublicServer.Init(
 			tchProtseq,
 			20, 
 			tchEndpoint,
@@ -34,10 +34,11 @@ int _tmain(int argc, _TCHAR* argv[])
 			pMgrTypeUuid,
 			pMgrEpv,
 			0
-			);
-
-		_getch();
+			))
+			break;
 	} while (FALSE);
-		
+
+	_getch();
+
 	return 0;
 }

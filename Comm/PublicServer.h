@@ -1,18 +1,17 @@
 #pragma once
 
 
-#ifndef _PUBLIC_SERVER_TAG_
-#define _PUBLIC_SERVER_TAG_	'VSBP'
-#endif
-
-
 #include <Rpc.h>
-
 
 #include "../../OsVersion/OsVersion/OsVersion.h"
 
 
 #pragma comment(lib, "Rpcrt4.lib")
+
+
+#ifndef _PUBLIC_SERVER_TAG_
+#define _PUBLIC_SERVER_TAG_	'VSBP'
+#endif
 
 
 void

@@ -2,7 +2,7 @@
 
 
 RPC_SERVER_STATUS
-	TestInterface( 
+	RpcTest( 
 	/* [string][in] */ unsigned char *puch
 	)
 {
@@ -24,7 +24,7 @@ RPC_SERVER_STATUS
 }
 
 RPC_SERVER_STATUS
-	StopRpcServer(
+	RpcStop(
 	void
 	)
 {

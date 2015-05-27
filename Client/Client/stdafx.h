@@ -14,6 +14,9 @@
 
 // TODO: 在此处引用程序需要的其他头文件
 #include <Windows.h>
+#include <conio.h>
 
+#include "../../Comm/Public.h"
 #include "../../Comm/PublicClient.h"
 #include "../../Server/Server/RpcInterface/server.h"
+#include "Test.h"
