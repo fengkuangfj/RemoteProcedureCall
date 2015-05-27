@@ -36,6 +36,9 @@
     <ClInclude Include="..\..\..\OsVersion\OsVersion\OsVersion.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Comm\Public.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

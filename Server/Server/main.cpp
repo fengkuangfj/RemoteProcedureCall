@@ -21,7 +21,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	do 
 	{
 		_tcscat_s(tchProtseq, _countof(tchProtseq), _T("ncalrpc"));
-		_tcscat_s(tchEndpoint, _countof(tchEndpoint), _T("{8dd50205-3108-498f-96e8-dbc4ec074cf9}"));
+		_tcscat_s(tchEndpoint, _countof(tchEndpoint), RPC_SERVER_END_POINT);
 
 		RpcIfHandle = RpcServerInterface_v1_0_s_ifspec;
 

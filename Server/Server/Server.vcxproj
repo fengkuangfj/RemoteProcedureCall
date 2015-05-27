@@ -79,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\OsVersion\OsVersion\OsVersion.h" />
+    <ClInclude Include="..\..\Comm\Public.h" />
     <ClInclude Include="..\..\Comm\PublicServer.h" />
     <ClInclude Include="RpcInterface.h" />
     <ClInclude Include="RpcInterface\server.h" />
