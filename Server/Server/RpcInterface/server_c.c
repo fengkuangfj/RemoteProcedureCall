@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Wed May 27 20:24:17 2015
+/* at Thu May 28 22:44:38 2015
  */
 /* Compiler settings for Server.idl:
     Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
@@ -111,7 +111,7 @@ RPC_SERVER_STATUS RpcTest(
 }
 
 
-RPC_SERVER_STATUS RpcStop( void)
+RPC_SERVER_STATUS RpcStopServer( void)
 {
 
     CLIENT_CALL_RETURN _RetVal;
@@ -172,7 +172,7 @@ static const Server_MIDL_PROC_FORMAT_STRING Server__MIDL_ProcFormatString =
 /* 34 */	0xd,		/* FC_ENUM16 */
 			0x0,		/* 0 */
 
-	/* Procedure RpcStop */
+	/* Procedure RpcStopServer */
 
 /* 36 */	0x32,		/* FC_BIND_PRIMITIVE */
 			0x48,		/* Old Flags:  */

@@ -11,7 +11,10 @@ RPC_SERVER_STATUS
 
 	__try
 	{
-		printf("%s \n", puch);
+		if (!puch)
+			__leave;
+
+		printf("[%s] %s \n", __FUNCTION__, puch);
 
 		RpcServerStatus = RPC_SERVER_STATUS_SUCCESS;
 	}
@@ -24,31 +27,22 @@ RPC_SERVER_STATUS
 }
 
 RPC_SERVER_STATUS
-	RpcStop(
+	RpcStopServer(
 	void
 	)
 {
 	RPC_SERVER_STATUS	RpcServerStatus = RPC_SERVER_STATUS_FAILED;
 
-	RPC_STATUS			RpcStatus		= RPC_S_OK;
+	CPublicServer		PublicServer;
 
 
-	__try
+	do 
 	{
-		RpcStatus = RpcMgmtStopServerListening(NULL);
-		if (RPC_S_OK != RpcStatus)
-			__leave;
-
-		RpcStatus = RpcServerUnregisterIf(NULL, NULL, FALSE);
-		if (RPC_S_OK != RpcStatus)
-			__leave;
+		if (!PublicServer.Unload(TRUE))
+			break;
 
 		RpcServerStatus = RPC_SERVER_STATUS_SUCCESS;
-	}
-	__finally
-	{
-		;
-	}
+	} while (FALSE);
 
 	return RpcServerStatus;
 }

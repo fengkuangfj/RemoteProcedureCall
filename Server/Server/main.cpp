@@ -13,9 +13,6 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	TCHAR			tchProtseq[MAX_PATH]	= {0};
 	TCHAR			tchEndpoint[MAX_PATH]	= {0};
-	RPC_IF_HANDLE	RpcIfHandle				= NULL;
-	UUID          *	pMgrTypeUuid			= NULL;
-	RPC_MGR_EPV   *	pMgrEpv					= NULL;
 
 
 	do 
@@ -23,16 +20,15 @@ int _tmain(int argc, _TCHAR* argv[])
 		_tcscat_s(tchProtseq, _countof(tchProtseq), RPC_PROT_SEQ);
 		_tcscat_s(tchEndpoint, _countof(tchEndpoint), RPC_END_POINT);
 
-		RpcIfHandle = RpcServerInterface_v1_0_s_ifspec;
-
 		if (!PublicServer.Init(
 			tchProtseq,
 			20, 
 			tchEndpoint,
-			RpcIfHandle,
+			NULL,
+			RpcServerInterface_v1_0_s_ifspec,
 			19,
-			pMgrTypeUuid,
-			pMgrEpv,
+			NULL,
+			NULL,
 			0
 			))
 			break;

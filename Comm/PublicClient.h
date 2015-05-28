@@ -34,14 +34,19 @@ public:
 
 	BOOL
 		Init(
-		__in	LPTSTR					lpObjUuid,
-		__in	LPTSTR					lpProtSeq,
-		__in	LPTSTR					lpNetworkAddr,
-		__in	LPTSTR					lpEndPoint,
-		__in	LPTSTR					lpOptions,
-		__out	LPTSTR				*	plpStringBinding,
-		__out	RPC_BINDING_HANDLE	*	pRpcBindingHandle
+		__in_opt	LPTSTR					lpObjUuid,
+		__in		LPTSTR					lpProtSeq,
+		__in_opt	LPTSTR					lpNetworkAddr,
+		__in		LPTSTR					lpEndPoint,
+		__in_opt	LPTSTR					lpOptions,
+		__in		RPC_BINDING_HANDLE	*	pRpcBindingHandle
+		);
+
+	BOOL
+		Unload(
+		__in RPC_BINDING_HANDLE * pRpcBindingHandle
 		);
 
 private:
+	static LPTSTR ms_lpStringBinding;
 };

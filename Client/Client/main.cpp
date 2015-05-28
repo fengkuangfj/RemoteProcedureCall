@@ -6,15 +6,10 @@
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	CPublicClient			PublicClient;
+	CPublicClient	PublicClient;
 
-	LPTSTR					lpObjUuid				= NULL;
-	TCHAR					tchProtSeq[MAX_PATH]	= {0};
-	LPTSTR					lpNetworkAddr			= NULL;
-	TCHAR					tchEndPoint[MAX_PATH]	= {0};
-	LPTSTR					lpOptions				= NULL;
-	LPTSTR					plpStringBinding		= NULL;
-	RPC_BINDING_HANDLE		pRpcBindingHandle		= NULL;
+	TCHAR			tchProtSeq[MAX_PATH]	= {0};
+	TCHAR			tchEndPoint[MAX_PATH]	= {0};
 
 
 	do 
@@ -23,18 +18,23 @@ int _tmain(int argc, _TCHAR* argv[])
 		_tcscat_s(tchEndPoint, _countof(tchEndPoint), RPC_END_POINT);
 
 		if (!PublicClient.Init(
-			lpObjUuid,
+			NULL,
 			tchProtSeq,
-			lpNetworkAddr,
+			NULL,
 			tchEndPoint,
-			lpOptions,
-			&plpStringBinding,
+			NULL,
 			&RpcServerInterface_Binding
 			))
 			break;
 
-		Test();
+		if (!TestRpcTest())
+			break;
+
+		if (!TestRpcStopServer())
+			break;
 	} while (FALSE);
+
+	PublicClient.Unload(&RpcServerInterface_Binding);
 
 	_getch();
 

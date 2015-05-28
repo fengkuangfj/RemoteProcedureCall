@@ -1,6 +1,10 @@
 #include "PublicServer.h"
 
 
+unsigned int		CPublicServer::ms_bDontWait		= 0;
+UUID			*	CPublicServer::ms_pMgrTypeUuid	= NULL;
+
+
 CPublicServer::CPublicServer()
 {
 	;
@@ -13,14 +17,15 @@ CPublicServer::~CPublicServer()
 
 BOOL
 	CPublicServer::Init(
-	__in LPTSTR				lpProtseq,
-	__in unsigned int		uMaxCalls,
-	__in LPTSTR				lpEndpoint,
-	__in RPC_IF_HANDLE		RpcIfHandle,
-	__in unsigned int		uMinimumCallThreads,
-	__in UUID          *	pMgrTypeUuid,
-	__in RPC_MGR_EPV   *	pMgrEpv,
-	__in unsigned int		uDontWait
+	__in		LPTSTR			lpProtseq,
+	__in		unsigned int	uMaxCalls,
+	__in		LPTSTR			lpEndpoint,
+	__in_opt	void          *	pSecurityDescriptor,
+	__in		RPC_IF_HANDLE	RpcIfHandle,
+	__in		unsigned int	uMinimumCallThreads,
+	__in_opt	UUID          *	pMgrTypeUuid,
+	__in_opt	RPC_MGR_EPV   *	pMgrEpv,
+	__in_opt	unsigned int	uDontWait
 	)
 {
 	BOOL						bRet					= FALSE;
@@ -46,12 +51,13 @@ BOOL
 			(RPC_WSTR)lpProtseq,
 			uMaxCalls,
 			(RPC_WSTR)lpEndpoint,
-			NULL
+			pSecurityDescriptor
 			);    
 		if (RPC_S_OK != RpcStatus)
 			__leave;
 
-		RpcStatus = RpcServerRegisterIf(RpcIfHandle, pMgrTypeUuid, pMgrEpv);
+		ms_pMgrTypeUuid = pMgrTypeUuid;
+		RpcStatus = RpcServerRegisterIf(RpcIfHandle, ms_pMgrTypeUuid, pMgrEpv);
 		if (RPC_S_OK != RpcStatus)
 			__leave;
 
@@ -62,9 +68,11 @@ BOOL
 		if (OS_VER_WINDOWS_XP == OsVer)
 			uMaxCalls = RPC_C_LISTEN_MAX_CALLS_DEFAULT;
 
-		if (uDontWait)
+		ms_bDontWait = uDontWait;
+
+		if (ms_bDontWait)
 		{
-			RpcStatus = RpcServerListen(uMinimumCallThreads, uMaxCalls, uDontWait); 
+			RpcStatus = RpcServerListen(uMinimumCallThreads, uMaxCalls, ms_bDontWait); 
 			if (RPC_S_OK != RpcStatus)
 				__leave;
 		}
@@ -131,6 +139,43 @@ DWORD
 	}
 
 	return 0;
+}
+
+BOOL
+	CPublicServer::Unload(
+	__in BOOL bFromRpcInterface
+	)
+{
+	BOOL		bRet		= FALSE;
+
+	RPC_STATUS	RpcStatus	= RPC_S_OK;
+
+
+	__try
+	{
+		RpcStatus = RpcMgmtStopServerListening(NULL);
+		if (RPC_S_OK != RpcStatus)
+			__leave;
+
+		if (ms_bDontWait)
+		{
+			RpcStatus = RpcMgmtWaitServerListen();
+			if (RPC_S_OK != RpcStatus)
+				__leave;
+		}
+
+		RpcStatus = RpcServerUnregisterIf(NULL, ms_pMgrTypeUuid, bFromRpcInterface ? FALSE : TRUE);
+		if (RPC_S_OK != RpcStatus)
+			__leave;
+
+		bRet = TRUE;
+	}
+	__finally
+	{
+		;
+	}
+
+	return bRet;
 }
 
 void

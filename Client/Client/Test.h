@@ -6,4 +6,7 @@
 
 
 BOOL
-	Test();
+	TestRpcTest();
+
+BOOL
+	TestRpcStopServer();

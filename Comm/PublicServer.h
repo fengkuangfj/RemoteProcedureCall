@@ -36,14 +36,20 @@ public:
 
 	BOOL
 		Init(
-		__in LPTSTR				lpProtseq,
-		__in unsigned int		uMaxCalls,
-		__in LPTSTR				lpEndpoint,
-		__in RPC_IF_HANDLE		RpcIfHandle,
-		__in unsigned int		uMinimumCallThreads,
-		__in UUID          *	pMgrTypeUuid,
-		__in RPC_MGR_EPV   *	pMgrEpv,
-		__in unsigned int		uDontWait
+		__in		LPTSTR			lpProtseq,
+		__in		unsigned int	uMaxCalls,
+		__in		LPTSTR			lpEndpoint,
+		__in_opt	void          *	pSecurityDescriptor,
+		__in		RPC_IF_HANDLE	RpcIfHandle,
+		__in		unsigned int	uMinimumCallThreads,
+		__in_opt	UUID          *	pMgrTypeUuid,
+		__in_opt	RPC_MGR_EPV   *	pMgrEpv,
+		__in_opt	unsigned int	uDontWait
+		);
+
+	BOOL
+		Unload(
+		__in BOOL bFromRpcInterface
 		);
 
 private:
@@ -53,6 +59,8 @@ private:
 		unsigned int uMaxCalls;
 	} RPC_SERVER_LISTEN_INFO, *PRPC_SERVER_LISTEN_INFO, *LPRPC_SERVER_LISTEN_INFO;
 
+	static unsigned int		ms_bDontWait;
+	static UUID			*	ms_pMgrTypeUuid;
 
 	static
 		DWORD
