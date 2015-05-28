@@ -1,6 +1,6 @@
-[  
-     implicit_handle(handle_t    RpcServerInterface_Binding)  
-]  
+[
+	implicit_handle(handle_t RpcServerInterface_Binding)  
+]
 
 interface RpcServerInterface
 {
