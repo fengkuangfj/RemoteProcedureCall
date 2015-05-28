@@ -157,7 +157,7 @@ BOOL
 		if (RPC_S_OK != RpcStatus)
 			__leave;
 
-		if (ms_bDontWait)
+		if (ms_bDontWait && !bFromRpcInterface)
 		{
 			RpcStatus = RpcMgmtWaitServerListen();
 			if (RPC_S_OK != RpcStatus)
