@@ -4,6 +4,7 @@
 unsigned int		CPublicServer::ms_bDontWait					= 0;
 UUID			*	CPublicServer::ms_pMgrTypeUuid				= NULL;
 BOOL				CPublicServer::ms_bRegistedAuthorizationFn	= FALSE;
+BOOL				CPublicServer::ms_bUnloaded					= FALSE;
 
 
 CPublicServer::CPublicServer()
@@ -164,27 +165,32 @@ BOOL
 
 	__try
 	{
-		if (ms_bRegistedAuthorizationFn)
+		if (!ms_bUnloaded)
 		{
-			RpcStatus = RpcMgmtSetAuthorizationFn(NULL);
+			if (ms_bRegistedAuthorizationFn)
+			{
+				RpcStatus = RpcMgmtSetAuthorizationFn(NULL);
+				if (RPC_S_OK != RpcStatus)
+					__leave;
+			}
+
+			RpcStatus = RpcMgmtStopServerListening(NULL);
 			if (RPC_S_OK != RpcStatus)
 				__leave;
-		}
 
-		RpcStatus = RpcMgmtStopServerListening(NULL);
-		if (RPC_S_OK != RpcStatus)
-			__leave;
+			if (ms_bDontWait && !bFromRpcInterface)
+			{
+				RpcStatus = RpcMgmtWaitServerListen();
+				if (RPC_S_OK != RpcStatus)
+					__leave;
+			}
 
-		if (ms_bDontWait && !bFromRpcInterface)
-		{
-			RpcStatus = RpcMgmtWaitServerListen();
+			RpcStatus = RpcServerUnregisterIf(NULL, ms_pMgrTypeUuid, bFromRpcInterface ? FALSE : TRUE);
 			if (RPC_S_OK != RpcStatus)
 				__leave;
-		}
 
-		RpcStatus = RpcServerUnregisterIf(NULL, ms_pMgrTypeUuid, bFromRpcInterface ? FALSE : TRUE);
-		if (RPC_S_OK != RpcStatus)
-			__leave;
+			ms_bUnloaded = TRUE;
+		}
 
 		bRet = TRUE;
 	}

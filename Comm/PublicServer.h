@@ -72,6 +72,7 @@ private:
 	static unsigned int		ms_bDontWait;
 	static UUID			*	ms_pMgrTypeUuid;
 	static BOOL				ms_bRegistedAuthorizationFn;
+	static BOOL				ms_bUnloaded;
 
 	static
 		DWORD
