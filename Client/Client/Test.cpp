@@ -29,27 +29,53 @@ BOOL
 
 
 BOOL
-	TestRpcStopServer()
+	TestRpcStopServer(
+	__in		BOOL				bDirectlyStop,
+	__in_opt	RPC_BINDING_HANDLE	RpcBindingHandle
+	)
 {
 	BOOL				bRet			= FALSE;
 
 	unsigned long		ExceptionCode	= 0;
 	RPC_SERVER_STATUS	RpcServerStatus = RPC_SERVER_STATUS_FAILED;
+	RPC_STATUS			RpcStatus		= RPC_S_OK;
 
 
-	RpcTryExcept
+	__try
 	{
-		RpcServerStatus = RpcStopServer();
-		if (RPC_SERVER_STATUS_SUCCESS != RpcServerStatus)
-			__leave;
 
-		bRet = TRUE;
+		if (bDirectlyStop)
+		{
+			if (!RpcBindingHandle)
+				__leave;
+
+			RpcStatus = RpcMgmtStopServerListening(RpcBindingHandle);
+			if (RPC_S_OK != RpcStatus)
+				__leave;
+
+			bRet = TRUE;
+		}
+		else
+		{
+			RpcTryExcept
+			{
+				RpcServerStatus = RpcStopServer();
+				if (RPC_SERVER_STATUS_SUCCESS != RpcServerStatus)
+					__leave;
+
+				bRet = TRUE;
+			}
+			RpcExcept(ExceptionCode = RpcExceptionCode(), EXCEPTION_EXECUTE_HANDLER)
+			{
+				printf("[%s] RpcExcept (%d) \n", __FUNCTION__, ExceptionCode);
+			}
+			RpcEndExcept;
+		}
 	}
-	RpcExcept(ExceptionCode = RpcExceptionCode(), EXCEPTION_EXECUTE_HANDLER)
+	__finally
 	{
-		printf("[%s] RpcExcept (%d) \n", __FUNCTION__, ExceptionCode);
+		;
 	}
-	RpcEndExcept;
 
 	return bRet;
 }

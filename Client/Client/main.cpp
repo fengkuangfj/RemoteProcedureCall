@@ -30,7 +30,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		if (!TestRpcTest())
 			break;
 
-		if (!TestRpcStopServer())
+		if (!TestRpcStopServer(TRUE, RpcServerInterface_Binding))
 			break;
 	} while (FALSE);
 

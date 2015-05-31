@@ -36,20 +36,30 @@ public:
 
 	BOOL
 		Init(
-		__in		LPTSTR			lpProtseq,
-		__in		unsigned int	uMaxCalls,
-		__in		LPTSTR			lpEndpoint,
-		__in_opt	void          *	pSecurityDescriptor,
-		__in		RPC_IF_HANDLE	RpcIfHandle,
-		__in		unsigned int	uMinimumCallThreads,
-		__in_opt	UUID          *	pMgrTypeUuid,
-		__in_opt	RPC_MGR_EPV   *	pMgrEpv,
-		__in_opt	unsigned int	uDontWait
+		__in		LPTSTR							lpProtseq,
+		__in		unsigned int					uMaxCalls,
+		__in		LPTSTR							lpEndpoint,
+		__in_opt	void						*	pSecurityDescriptor,
+		__in		RPC_IF_HANDLE					RpcIfHandle,
+		__in		unsigned int					uMinimumCallThreads,
+		__in_opt	UUID						*	pMgrTypeUuid,
+		__in_opt	RPC_MGR_EPV					*	pMgrEpv,
+		__in		unsigned int					uDontWait,
+		__in_opt	RPC_MGMT_AUTHORIZATION_FN		RpcMgmtAuthorizationFn
 		);
 
 	BOOL
 		Unload(
 		__in BOOL bFromRpcInterface
+		);
+
+	static
+		int
+		__RPC_API 
+		RpcMgmtAuthorizationFn(
+		__in	RPC_BINDING_HANDLE		ClientBinding,
+		__in	unsigned long			RequestedMgmtOperation,
+		__out	RPC_STATUS __RPC_FAR *	Status
 		);
 
 private:
@@ -61,6 +71,7 @@ private:
 
 	static unsigned int		ms_bDontWait;
 	static UUID			*	ms_pMgrTypeUuid;
+	static BOOL				ms_bRegistedAuthorizationFn;
 
 	static
 		DWORD

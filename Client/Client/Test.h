@@ -9,4 +9,7 @@ BOOL
 	TestRpcTest();
 
 BOOL
-	TestRpcStopServer();
+	TestRpcStopServer(
+	__in		BOOL				bDirectlyStop,
+	__in_opt	RPC_BINDING_HANDLE	RpcBindingHandle
+	);

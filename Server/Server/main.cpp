@@ -29,12 +29,15 @@ int _tmain(int argc, _TCHAR* argv[])
 			19,
 			NULL,
 			NULL,
-			0
+			0,
+			CPublicServer::RpcMgmtAuthorizationFn
 			))
 			break;
 	} while (FALSE);
 
 	_getch();
+
+	PublicServer.Unload(FALSE);
 
 	return 0;
 }

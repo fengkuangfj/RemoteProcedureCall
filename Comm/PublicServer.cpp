@@ -1,8 +1,9 @@
 #include "PublicServer.h"
 
 
-unsigned int		CPublicServer::ms_bDontWait		= 0;
-UUID			*	CPublicServer::ms_pMgrTypeUuid	= NULL;
+unsigned int		CPublicServer::ms_bDontWait					= 0;
+UUID			*	CPublicServer::ms_pMgrTypeUuid				= NULL;
+BOOL				CPublicServer::ms_bRegistedAuthorizationFn	= FALSE;
 
 
 CPublicServer::CPublicServer()
@@ -17,15 +18,16 @@ CPublicServer::~CPublicServer()
 
 BOOL
 	CPublicServer::Init(
-	__in		LPTSTR			lpProtseq,
-	__in		unsigned int	uMaxCalls,
-	__in		LPTSTR			lpEndpoint,
-	__in_opt	void          *	pSecurityDescriptor,
-	__in		RPC_IF_HANDLE	RpcIfHandle,
-	__in		unsigned int	uMinimumCallThreads,
-	__in_opt	UUID          *	pMgrTypeUuid,
-	__in_opt	RPC_MGR_EPV   *	pMgrEpv,
-	__in_opt	unsigned int	uDontWait
+	__in		LPTSTR							lpProtseq,
+	__in		unsigned int					uMaxCalls,
+	__in		LPTSTR							lpEndpoint,
+	__in_opt	void						*	pSecurityDescriptor,
+	__in		RPC_IF_HANDLE					RpcIfHandle,
+	__in		unsigned int					uMinimumCallThreads,
+	__in_opt	UUID						*	pMgrTypeUuid,
+	__in_opt	RPC_MGR_EPV					*	pMgrEpv,
+	__in		unsigned int					uDontWait,
+	__in_opt	RPC_MGMT_AUTHORIZATION_FN		RpcMgmtAuthorizationFn
 	)
 {
 	BOOL						bRet					= FALSE;
@@ -46,6 +48,15 @@ BOOL
 			!RpcIfHandle ||
 			!uMinimumCallThreads)
 			__leave;
+
+		if (RpcMgmtAuthorizationFn)
+		{
+			RpcStatus = RpcMgmtSetAuthorizationFn(RpcMgmtAuthorizationFn);
+			if (RPC_S_OK != RpcStatus)
+				__leave;
+
+			ms_bRegistedAuthorizationFn = TRUE;
+		}
 
 		RpcStatus = RpcServerUseProtseqEp(
 			(RPC_WSTR)lpProtseq,
@@ -153,6 +164,13 @@ BOOL
 
 	__try
 	{
+		if (ms_bRegistedAuthorizationFn)
+		{
+			RpcStatus = RpcMgmtSetAuthorizationFn(NULL);
+			if (RPC_S_OK != RpcStatus)
+				__leave;
+		}
+
 		RpcStatus = RpcMgmtStopServerListening(NULL);
 		if (RPC_S_OK != RpcStatus)
 			__leave;
@@ -176,6 +194,53 @@ BOOL
 	}
 
 	return bRet;
+}
+
+int
+	CPublicServer::RpcMgmtAuthorizationFn(
+	__in	RPC_BINDING_HANDLE		ClientBinding,
+	__in	unsigned long			RequestedMgmtOperation,
+	__out	RPC_STATUS __RPC_FAR *	Status
+	)
+{
+	int nRet = FALSE;
+
+
+	__try
+	{
+		if (!Status)
+			__leave;
+
+		if (!ClientBinding)
+		{
+			*Status = RPC_S_INVALID_ARG;
+			__leave;
+		}
+
+		switch (RequestedMgmtOperation)
+		{
+		case RPC_C_MGMT_INQ_IF_IDS:
+		case RPC_C_MGMT_INQ_PRINC_NAME:
+		case RPC_C_MGMT_INQ_STATS:
+		case RPC_C_MGMT_IS_SERVER_LISTEN:
+		case RPC_C_MGMT_STOP_SERVER_LISTEN:
+			{
+				nRet = TRUE;
+				break;
+			}
+		default:
+			{
+				*Status = RPC_S_OK;
+				__leave;
+			}
+		}
+	}
+	__finally
+	{
+		;
+	}
+
+	return nRet;
 }
 
 void
