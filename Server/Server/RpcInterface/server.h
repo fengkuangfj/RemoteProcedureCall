@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Thu May 28 22:52:55 2015
+/* at Mon Jun 01 19:46:06 2015
  */
 /* Compiler settings for Server.idl:
     Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
@@ -66,6 +66,9 @@ RPC_SERVER_STATUS RpcTest(
     /* [string][in] */ unsigned char *puch);
 
 RPC_SERVER_STATUS RpcStopServer( void);
+
+/* [callback] */ RPC_SERVER_STATUS RpcTestCallBack( 
+    /* [string][in] */ unsigned char *pch);
 
 
 extern handle_t RpcServerInterface_Binding;

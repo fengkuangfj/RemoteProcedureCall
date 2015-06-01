@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Thu May 28 22:52:55 2015
+/* at Mon Jun 01 19:46:06 2015
  */
 /* Compiler settings for Server.idl:
     Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
@@ -35,7 +35,7 @@
 #include "Server.h"
 
 #define TYPE_FORMAT_STRING_SIZE   7                                 
-#define PROC_FORMAT_STRING_SIZE   67                                
+#define PROC_FORMAT_STRING_SIZE   103                               
 #define EXPR_FORMAT_STRING_SIZE   1                                 
 #define TRANSMIT_AS_TABLE_SIZE    0            
 #define WIRE_MARSHAL_TABLE_SIZE   0            
@@ -89,6 +89,22 @@ static const RPC_SERVER_INTERFACE RpcServerInterface___RpcServerInterface =
 RPC_IF_HANDLE RpcServerInterface_v1_0_s_ifspec = (RPC_IF_HANDLE)& RpcServerInterface___RpcServerInterface;
 
 extern const MIDL_STUB_DESC RpcServerInterface_StubDesc;
+
+ extern const MIDL_STUBLESS_PROXY_INFO RpcServerInterface_ProxyInfo;
+
+/* [callback] */ RPC_SERVER_STATUS RpcTestCallBack( 
+    /* [string][in] */ unsigned char *pch)
+{
+
+    CLIENT_CALL_RETURN _RetVal;
+
+    _RetVal = NdrClientCall2(
+                  ( PMIDL_STUB_DESC  )&RpcServerInterface_StubDesc,
+                  (PFORMAT_STRING) &Server__MIDL_ProcFormatString.Format[66],
+                  ( unsigned char * )&pch);
+    return ( RPC_SERVER_STATUS  )_RetVal.Simple;
+    
+}
 
 
 #if !defined(__RPC_WIN32__)
@@ -162,6 +178,36 @@ static const Server_MIDL_PROC_FORMAT_STRING Server__MIDL_ProcFormatString =
 /* 64 */	0xd,		/* FC_ENUM16 */
 			0x0,		/* 0 */
 
+	/* Procedure RpcTestCallBack */
+
+/* 66 */	0x34,		/* FC_CALLBACK_HANDLE */
+			0x48,		/* Old Flags:  */
+/* 68 */	NdrFcLong( 0x0 ),	/* 0 */
+/* 72 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 74 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
+/* 76 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 78 */	NdrFcShort( 0x6 ),	/* 6 */
+/* 80 */	0x46,		/* Oi2 Flags:  clt must size, has return, has ext, */
+			0x2,		/* 2 */
+/* 82 */	0x8,		/* 8 */
+			0x1,		/* Ext Flags:  new corr desc, */
+/* 84 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 86 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 88 */	NdrFcShort( 0x0 ),	/* 0 */
+
+	/* Parameter pch */
+
+/* 90 */	NdrFcShort( 0x10b ),	/* Flags:  must size, must free, in, simple ref, */
+/* 92 */	NdrFcShort( 0x0 ),	/* x86 Stack size/offset = 0 */
+/* 94 */	NdrFcShort( 0x4 ),	/* Type Offset=4 */
+
+	/* Return value */
+
+/* 96 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
+/* 98 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
+/* 100 */	0xd,		/* FC_ENUM16 */
+			0x0,		/* 0 */
+
 			0x0
         }
     };
@@ -184,7 +230,13 @@ static const Server_MIDL_TYPE_FORMAT_STRING Server__MIDL_TypeFormatString =
 static const unsigned short RpcServerInterface_FormatStringOffsetTable[] =
     {
     0,
-    36
+    36,
+    };
+
+
+static const unsigned short _callbackRpcServerInterface_FormatStringOffsetTable[] =
+    {
+    66
     };
 
 
@@ -227,7 +279,7 @@ static const RPC_DISPATCH_TABLE RpcServerInterface_v1_0_DispatchTable =
 static const SERVER_ROUTINE RpcServerInterface_ServerRoutineTable[] = 
     {
     (SERVER_ROUTINE)RpcTest,
-    (SERVER_ROUTINE)RpcStopServer
+    (SERVER_ROUTINE)RpcStopServer,
     };
 
 static const MIDL_SERVER_INFO RpcServerInterface_ServerInfo = 

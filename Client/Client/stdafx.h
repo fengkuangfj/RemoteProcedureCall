@@ -20,3 +20,4 @@
 #include "../../Comm/PublicClient.h"
 #include "../../Server/Server/RpcInterface/server.h"
 #include "Test.h"
+#include "RpcCallback/RpcCallback.h"
