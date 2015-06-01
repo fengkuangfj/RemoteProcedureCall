@@ -21,3 +21,4 @@
 #include "../../Comm/PublicServer.h"
 #include "RpcInterface/server.h"
 #include "RpcInterface.h"
+#include "Test.h"

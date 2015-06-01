@@ -34,6 +34,8 @@ int _tmain(int argc, _TCHAR* argv[])
 			break;
 	} while (FALSE);
 
+	_getch();
+
 	PublicClient.Unload(&RpcServerInterface_Binding);
 
 	return 0;

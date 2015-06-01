@@ -16,8 +16,7 @@ RPC_SERVER_STATUS
 
 		printf("[%s] %s \n", __FUNCTION__, puch);
 
-		RpcServerStatus = RpcTestCallBack((unsigned char *)"form server");
-		if (RPC_SERVER_STATUS_SUCCESS != RpcServerStatus)
+		if (!TestRpcTestCallBack())
 			__leave;
 
 		RpcServerStatus = RPC_SERVER_STATUS_SUCCESS;

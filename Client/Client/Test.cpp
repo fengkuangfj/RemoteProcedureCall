@@ -6,7 +6,7 @@ BOOL
 {
 	BOOL				bRet			= FALSE;
 
-	unsigned long		ExceptionCode	= 0;
+	unsigned long		ExceptionCode	= RPC_S_OK;
 	RPC_SERVER_STATUS	RpcServerStatus = RPC_SERVER_STATUS_FAILED;
 
 
@@ -36,7 +36,7 @@ BOOL
 {
 	BOOL				bRet			= FALSE;
 
-	unsigned long		ExceptionCode	= 0;
+	unsigned long		ExceptionCode	= RPC_S_OK;
 	RPC_SERVER_STATUS	RpcServerStatus = RPC_SERVER_STATUS_FAILED;
 	RPC_STATUS			RpcStatus		= RPC_S_OK;
 
