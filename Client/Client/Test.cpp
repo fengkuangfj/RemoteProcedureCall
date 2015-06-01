@@ -97,9 +97,8 @@ BOOL
 	RPC_STATUS			RpcStatus		= RPC_S_OK;
 
 
-	__try
+	RpcTryExcept
 	{
-
 		if (bDirectlyStop)
 		{
 			if (!RpcBindingHandle)
@@ -108,30 +107,21 @@ BOOL
 			RpcStatus = RpcMgmtStopServerListening(RpcBindingHandle);
 			if (RPC_S_OK != RpcStatus)
 				__leave;
-
-			bRet = TRUE;
 		}
 		else
 		{
-			RpcTryExcept
-			{
-				RpcServerStatus = RpcStopServer();
-				if (RPC_SERVER_STATUS_SUCCESS != RpcServerStatus)
-					__leave;
-
-				bRet = TRUE;
-			}
-			RpcExcept(ExceptionCode = RpcExceptionCode(), EXCEPTION_EXECUTE_HANDLER)
-			{
-				printf("[%s] RpcExcept (%d) \n", __FUNCTION__, ExceptionCode);
-			}
-			RpcEndExcept;
+			RpcServerStatus = RpcStopServer();
+			if (RPC_SERVER_STATUS_SUCCESS != RpcServerStatus)
+				__leave;
 		}
+
+		bRet = TRUE;
 	}
-	__finally
+	RpcExcept(ExceptionCode = RpcExceptionCode(), EXCEPTION_EXECUTE_HANDLER)
 	{
-		;
+		printf("[%s] RpcExcept (%d) \n", __FUNCTION__, ExceptionCode);
 	}
+	RpcEndExcept;
 
 	return bRet;
 }
