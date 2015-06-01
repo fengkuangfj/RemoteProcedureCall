@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Mon Jun 01 19:46:06 2015
+/* at Mon Jun 01 21:25:15 2015
  */
 /* Compiler settings for Server.idl:
     Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
@@ -65,10 +65,12 @@ typedef enum _RPC_SERVER_STATUS *LPRPC_SERVER_STATUS;
 RPC_SERVER_STATUS RpcTest( 
     /* [string][in] */ unsigned char *puch);
 
-RPC_SERVER_STATUS RpcStopServer( void);
+RPC_SERVER_STATUS RpcUseCallback( void);
 
-/* [callback] */ RPC_SERVER_STATUS RpcTestCallBack( 
+/* [callback] */ RPC_SERVER_STATUS RpcCallback( 
     /* [string][in] */ unsigned char *pch);
+
+RPC_SERVER_STATUS RpcStopServer( void);
 
 
 extern handle_t RpcServerInterface_Binding;

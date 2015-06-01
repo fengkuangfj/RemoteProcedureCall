@@ -30,11 +30,13 @@ int _tmain(int argc, _TCHAR* argv[])
 		if (!TestRpcTest())
 			break;
 
-		if (!TestRpcStopServer(TRUE, RpcServerInterface_Binding))
+		if (!TestRpcUseCallback())
 			break;
 	} while (FALSE);
 
 	_getch();
+
+	TestRpcStopServer(TRUE, RpcServerInterface_Binding);
 
 	PublicClient.Unload(&RpcServerInterface_Binding);
 

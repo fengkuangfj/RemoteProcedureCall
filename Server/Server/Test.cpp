@@ -2,7 +2,7 @@
 
 
 BOOL
-	TestRpcTestCallBack()
+	TestRpcCallback()
 {
 	BOOL				bRet			= FALSE;
 
@@ -12,7 +12,7 @@ BOOL
 
 	RpcTryExcept
 	{
-		RpcServerStatus = RpcTestCallBack((unsigned char *)"form server");
+		RpcServerStatus = RpcCallback((unsigned char *)"form server");
 		if (RPC_SERVER_STATUS_SUCCESS != RpcServerStatus)
 			__leave;
 

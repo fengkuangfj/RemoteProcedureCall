@@ -27,6 +27,62 @@ BOOL
 	return bRet;
 }
 
+BOOL
+	TestRpcUseCallback()
+{
+	BOOL	bRet	= FALSE;
+
+	HANDLE	hThread = NULL;
+
+
+	__try
+	{
+		hThread = CreateThread(
+			NULL,
+			0,
+			TestRpcUseCallbackThread,
+			NULL,
+			0,
+			NULL		
+			);
+		if (!hThread)
+			__leave;
+
+		bRet = TRUE;
+	}
+	__finally
+	{
+		if (hThread)
+			CloseHandle(hThread);
+	}
+
+	return bRet;
+}
+
+DWORD
+	WINAPI
+	TestRpcUseCallbackThread(
+	LPVOID lpThreadParameter
+	)
+{
+	RPC_SERVER_STATUS	RpcServerStatus = RPC_SERVER_STATUS_FAILED;
+	unsigned long		ExceptionCode	= RPC_S_OK;
+
+
+	RpcTryExcept
+	{
+		RpcServerStatus = RpcUseCallback();
+		if (RPC_SERVER_STATUS_SUCCESS != RpcServerStatus)
+			__leave;
+	}
+	RpcExcept(ExceptionCode = RpcExceptionCode(), EXCEPTION_EXECUTE_HANDLER)
+	{
+		printf("[%s] RpcExcept (%d) \n", __FUNCTION__, ExceptionCode);
+	}
+	RpcEndExcept;
+
+	return 0;
+}
 
 BOOL
 	TestRpcStopServer(

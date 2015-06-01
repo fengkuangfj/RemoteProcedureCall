@@ -2,7 +2,7 @@
 
 
 RPC_SERVER_STATUS
-	RpcTest( 
+	RpcTest(
 	/* [string][in] */ unsigned char *puch
 	)
 {
@@ -16,7 +16,27 @@ RPC_SERVER_STATUS
 
 		printf("[%s] %s \n", __FUNCTION__, puch);
 
-		if (!TestRpcTestCallBack())
+		RpcServerStatus = RPC_SERVER_STATUS_SUCCESS;
+	}
+	__finally
+	{
+		;
+	}
+
+	return RpcServerStatus;
+}
+
+RPC_SERVER_STATUS
+	RpcUseCallback(
+	void
+	)
+{
+	RPC_SERVER_STATUS RpcServerStatus = RPC_SERVER_STATUS_FAILED;
+
+
+	__try
+	{
+		if (!TestRpcCallback())
 			__leave;
 
 		RpcServerStatus = RPC_SERVER_STATUS_SUCCESS;

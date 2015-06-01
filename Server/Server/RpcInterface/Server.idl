@@ -12,6 +12,7 @@ interface RpcServerInterface
 	} RPC_SERVER_STATUS, *PRPC_SERVER_STATUS, *LPRPC_SERVER_STATUS;
 
 	RPC_SERVER_STATUS RpcTest([in, string] unsigned char * puch);
+	RPC_SERVER_STATUS RpcUseCallback(void);
+	[callback] RPC_SERVER_STATUS RpcCallback([in, string] char * pch);
 	RPC_SERVER_STATUS RpcStopServer(void);
-	[callback] RPC_SERVER_STATUS RpcTestCallBack([in, string] char * pch);
 }

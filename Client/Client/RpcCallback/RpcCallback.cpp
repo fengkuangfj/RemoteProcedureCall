@@ -3,7 +3,7 @@
 
 /* [callback] */
 RPC_SERVER_STATUS
-	RpcTestCallBack( 
+	RpcCallback(
 	/* [string][in] */ unsigned char *pch
 	)
 {

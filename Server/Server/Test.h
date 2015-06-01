@@ -6,4 +6,4 @@
 
 
 BOOL
-	TestRpcTestCallBack();
+	TestRpcCallback();
