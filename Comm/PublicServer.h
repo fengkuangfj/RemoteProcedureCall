@@ -1,6 +1,6 @@
 #pragma once
 
-
+#include <stdio.h>
 #include <Rpc.h>
 
 #include "../../OsVersion/OsVersion/OsVersion.h"
@@ -36,14 +36,17 @@ public:
 
 	BOOL
 		Init(
-		__in		LPTSTR							lpProtseq,
-		__in		unsigned int					uMaxCalls,
-		__in		LPTSTR							lpEndpoint,
-		__in_opt	void						*	pSecurityDescriptor,
 		__in		RPC_IF_HANDLE					RpcIfHandle,
-		__in		unsigned int					uMinimumCallThreads,
 		__in_opt	UUID						*	pMgrTypeUuid,
 		__in_opt	RPC_MGR_EPV					*	pMgrEpv,
+		__in		unsigned int					uFlags,
+		__in_opt	unsigned int					uMaxCalls,
+		__in_opt	unsigned int					uMaxRpcSize,
+		__in_opt	RPC_IF_CALLBACK_FN			*	pIfCallbackFn,
+		__in		LPTSTR							lpProtseq,
+		__in		LPTSTR							lpEndpoint,
+		__in_opt	void						*	pSecurityDescriptor,
+		__in		unsigned int					uMinimumCallThreads,
 		__in		unsigned int					uDontWait,
 		__in_opt	RPC_MGMT_AUTHORIZATION_FN		RpcMgmtAuthorizationFn
 		);
@@ -60,6 +63,14 @@ public:
 		__in	RPC_BINDING_HANDLE		ClientBinding,
 		__in	unsigned long			RequestedMgmtOperation,
 		__out	RPC_STATUS __RPC_FAR *	Status
+		);
+
+	static
+		RPC_STATUS
+		RPC_ENTRY
+		RpcIfCallbackFn(
+		__in RPC_IF_HANDLE		InterfaceUuid,
+		__in void			*	Context
 		);
 
 private:

@@ -19,14 +19,17 @@ CPublicServer::~CPublicServer()
 
 BOOL
 	CPublicServer::Init(
-	__in		LPTSTR							lpProtseq,
-	__in		unsigned int					uMaxCalls,
-	__in		LPTSTR							lpEndpoint,
-	__in_opt	void						*	pSecurityDescriptor,
 	__in		RPC_IF_HANDLE					RpcIfHandle,
-	__in		unsigned int					uMinimumCallThreads,
 	__in_opt	UUID						*	pMgrTypeUuid,
 	__in_opt	RPC_MGR_EPV					*	pMgrEpv,
+	__in		unsigned int					uFlags,
+	__in_opt	unsigned int					uMaxCalls,
+	__in_opt	unsigned int					uMaxRpcSize,
+	__in_opt	RPC_IF_CALLBACK_FN			*	pIfCallbackFn,
+	__in		LPTSTR							lpProtseq,
+	__in		LPTSTR							lpEndpoint,
+	__in_opt	void						*	pSecurityDescriptor,
+	__in		unsigned int					uMinimumCallThreads,
 	__in		unsigned int					uDontWait,
 	__in_opt	RPC_MGMT_AUTHORIZATION_FN		RpcMgmtAuthorizationFn
 	)
@@ -43,16 +46,28 @@ BOOL
 
 	__try
 	{
-		if (!lpProtseq ||
-			!uMaxCalls ||
+		if (!RpcIfHandle ||
+			!uFlags ||
+			!lpProtseq ||
 			!lpEndpoint ||
-			!RpcIfHandle ||
 			!uMinimumCallThreads)
 			__leave;
 
 		// 1¡¢Register the interface
 		ms_pMgrTypeUuid = pMgrTypeUuid;
-		RpcStatus = RpcServerRegisterIf(RpcIfHandle, ms_pMgrTypeUuid, pMgrEpv);
+
+		if (!uMaxRpcSize)
+			uMaxRpcSize = -1;
+
+		RpcStatus = RpcServerRegisterIf2(
+			RpcIfHandle,
+			ms_pMgrTypeUuid,
+			pMgrEpv,
+			uFlags,
+			uMaxCalls,
+			uMaxRpcSize,
+			pIfCallbackFn
+			);
 		if (RPC_S_OK != RpcStatus)
 			__leave;
 
@@ -79,7 +94,7 @@ BOOL
 
 		// 4¡¢Listen for client calls
 		OsVer = OsVersion.GetOSVer();
-		if (OS_VER_WINDOWS_XP == OsVer)
+		if (OS_VER_WINDOWS_XP == OsVer || !uMaxCalls)
 			uMaxCalls = RPC_C_LISTEN_MAX_CALLS_DEFAULT;
 
 		if (uMinimumCallThreads >= uMaxCalls)
@@ -107,7 +122,7 @@ BOOL
 				RpcServerListenThread,
 				lpRpcServerListenInfo,
 				0,
-				NULL				
+				NULL
 				);
 			if (!hThread)
 				__leave;
@@ -251,6 +266,68 @@ int
 	}
 
 	return nRet;
+}
+
+RPC_STATUS
+	CPublicServer::RpcIfCallbackFn(
+	__in RPC_IF_HANDLE		InterfaceUuid,
+	__in void			*	Context
+	)
+{
+	RPC_STATUS					RpcStatus						= RPC_S_OK;
+
+	RPC_IF_HANDLE				ClientBindingHandle				= NULL;
+	unsigned long				uClientPid						= 0;
+	RPC_CALL_ATTRIBUTES_V2		RpcCallAttributes				= {0};
+	CHAR						chServerPrincipalName[MAX_PATH]	= {0};
+	CHAR						chClientPrincipalName[MAX_PATH]	= {0};
+	RPC_CALL_LOCAL_ADDRESS_V1	CallLocalAddress				= {0};
+	CHAR						chBuffer[MAX_PATH]				= {0};	
+
+
+
+	__try
+	{
+		if (!Context)
+			__leave;
+
+		ClientBindingHandle = (RPC_IF_HANDLE)Context;
+
+		RpcStatus = I_RpcBindingInqLocalClientPID(ClientBindingHandle, &uClientPid);
+		if (RPC_S_OK != RpcStatus)
+			__leave;
+
+		RpcCallAttributes.Version = RPC_CALL_ATTRIBUTES_VERSION;
+
+ 		RpcCallAttributes.Flags |= RPC_QUERY_SERVER_PRINCIPAL_NAME;
+ 		RpcCallAttributes.ServerPrincipalName = (unsigned short *)chServerPrincipalName;
+ 		RpcCallAttributes.ServerPrincipalNameBufferLength = sizeof(chServerPrincipalName);
+
+ 		RpcCallAttributes.Flags |= RPC_QUERY_CLIENT_PRINCIPAL_NAME;
+ 		RpcCallAttributes.ClientPrincipalName = (unsigned short *)chClientPrincipalName;
+ 		RpcCallAttributes.ClientPrincipalNameBufferLength = sizeof(chClientPrincipalName);
+ 
+//  	RpcCallAttributes.Flags |= RPC_QUERY_CALL_LOCAL_ADDRESS;
+// 		CallLocalAddress.Version = 1;
+// 		CallLocalAddress.Buffer = chBuffer;
+// 		CallLocalAddress.BufferSize = sizeof(chBuffer);
+// 		CallLocalAddress.AddressFormat = rlafIPv4;
+//  	RpcCallAttributes.CallLocalAddress = &CallLocalAddress;
+ 
+ 		RpcCallAttributes.Flags |= RPC_QUERY_CLIENT_PID;
+
+		RpcStatus = RpcServerInqCallAttributes(ClientBindingHandle, &RpcCallAttributes);
+		if (RPC_S_OK != RpcStatus)
+			__leave;
+
+		printf("[%s] %d \n", __FUNCTION__, uClientPid);
+	}
+	__finally
+	{
+		;
+	}
+
+	return RpcStatus;
 }
 
 void

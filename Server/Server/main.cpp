@@ -21,14 +21,17 @@ int _tmain(int argc, _TCHAR* argv[])
 		_tcscat_s(tchEndpoint, _countof(tchEndpoint), RPC_END_POINT);
 
 		if (!PublicServer.Init(
+			RpcServerInterface_v1_0_s_ifspec,
+			NULL,
+			NULL,
+			RPC_IF_SEC_NO_CACHE,
+			0,
+			0,
+			CPublicServer::RpcIfCallbackFn,
 			tchProtseq,
-			20, 
 			tchEndpoint,
 			NULL,
-			RpcServerInterface_v1_0_s_ifspec,
-			19,
-			NULL,
-			NULL,
+			8,
 			0,
 			CPublicServer::RpcMgmtAuthorizationFn
 			))
