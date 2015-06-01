@@ -50,6 +50,24 @@ BOOL
 			!uMinimumCallThreads)
 			__leave;
 
+		// 1、Register the interface
+		ms_pMgrTypeUuid = pMgrTypeUuid;
+		RpcStatus = RpcServerRegisterIf(RpcIfHandle, ms_pMgrTypeUuid, pMgrEpv);
+		if (RPC_S_OK != RpcStatus)
+			__leave;
+
+		// 2、Create binding information
+		// 3、Register the endpoints
+		RpcStatus = RpcServerUseProtseqEp(
+			(RPC_WSTR)lpProtseq,
+			uMaxCalls,
+			(RPC_WSTR)lpEndpoint,
+			pSecurityDescriptor
+			);
+		if (RPC_S_OK != RpcStatus)
+			__leave;
+
+		// 设置授权回调函数
 		if (RpcMgmtAuthorizationFn)
 		{
 			RpcStatus = RpcMgmtSetAuthorizationFn(RpcMgmtAuthorizationFn);
@@ -59,29 +77,15 @@ BOOL
 			ms_bRegistedAuthorizationFn = TRUE;
 		}
 
-		RpcStatus = RpcServerUseProtseqEp(
-			(RPC_WSTR)lpProtseq,
-			uMaxCalls,
-			(RPC_WSTR)lpEndpoint,
-			pSecurityDescriptor
-			);    
-		if (RPC_S_OK != RpcStatus)
-			__leave;
-
-		ms_pMgrTypeUuid = pMgrTypeUuid;
-		RpcStatus = RpcServerRegisterIf(RpcIfHandle, ms_pMgrTypeUuid, pMgrEpv);
-		if (RPC_S_OK != RpcStatus)
-			__leave;
-
-		if (uMinimumCallThreads >= uMaxCalls)
-			__leave;
-
+		// 4、Listen for client calls
 		OsVer = OsVersion.GetOSVer();
 		if (OS_VER_WINDOWS_XP == OsVer)
 			uMaxCalls = RPC_C_LISTEN_MAX_CALLS_DEFAULT;
 
-		ms_bDontWait = uDontWait;
+		if (uMinimumCallThreads >= uMaxCalls)
+			__leave;
 
+		ms_bDontWait = uDontWait;
 		if (ms_bDontWait)
 		{
 			RpcStatus = RpcServerListen(uMinimumCallThreads, uMaxCalls, ms_bDontWait); 
