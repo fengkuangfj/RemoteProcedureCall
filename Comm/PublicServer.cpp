@@ -179,7 +179,7 @@ BOOL
 			}
 
 			RpcStatus = RpcMgmtStopServerListening(NULL);
-			if (RPC_S_OK != RpcStatus)
+			if (RPC_S_OK != RpcStatus && RPC_S_NOT_LISTENING != RpcStatus)
 				__leave;
 
 			if (ms_bDontWait && !bFromRpcInterface)

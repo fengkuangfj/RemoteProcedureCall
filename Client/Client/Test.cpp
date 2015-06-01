@@ -105,7 +105,7 @@ BOOL
 				__leave;
 
 			RpcStatus = RpcMgmtStopServerListening(RpcBindingHandle);
-			if (RPC_S_OK != RpcStatus)
+			if (RPC_S_OK != RpcStatus && RPC_S_SERVER_UNAVAILABLE != RpcStatus)
 				__leave;
 		}
 		else
