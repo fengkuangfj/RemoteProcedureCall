@@ -4,12 +4,12 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Mon Jun 01 21:25:15 2015
+/* at Tue Jun 02 22:33:15 2015
  */
 /* Compiler settings for Server.idl:
     Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
     protocol : dce , ms_ext, c_ext, robust
-    error checks: allocation ref bounds_check enum stub_data 
+    error checks: allocation ref bounds_check enum stub_data , use_epv
     VC __declspec() decoration level: 
          __declspec(uuid()), __declspec(selectany), __declspec(novtable)
          DECLSPEC_UUID(), MIDL_INTERFACE()
@@ -74,6 +74,8 @@ extern const MIDL_SERVER_INFO RpcServerInterface_ServerInfo;
 
 extern const RPC_DISPATCH_TABLE RpcServerInterface_v1_0_DispatchTable;
 
+extern const RpcServerInterface_v1_0_epv_t DEFAULT_EPV;
+
 static const RPC_SERVER_INTERFACE RpcServerInterface___RpcServerInterface =
     {
     sizeof(RPC_SERVER_INTERFACE),
@@ -82,7 +84,7 @@ static const RPC_SERVER_INTERFACE RpcServerInterface___RpcServerInterface =
     (RPC_DISPATCH_TABLE*)&RpcServerInterface_v1_0_DispatchTable,
     0,
     0,
-    0,
+    (RPC_MGR_EPV*)&DEFAULT_EPV,
     &RpcServerInterface_ServerInfo,
     0x04000000
     };
@@ -300,6 +302,13 @@ static const RPC_DISPATCH_TABLE RpcServerInterface_v1_0_DispatchTable =
     {
     3,
     (RPC_DISPATCH_FUNCTION*)RpcServerInterface_table
+    };
+
+static const RpcServerInterface_v1_0_epv_t DEFAULT_EPV = 
+    {
+    RpcTest,
+    RpcUseCallback,
+    RpcStopServer
     };
 
 static const SERVER_ROUTINE RpcServerInterface_ServerRoutineTable[] = 

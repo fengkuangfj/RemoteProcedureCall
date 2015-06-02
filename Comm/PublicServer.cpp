@@ -59,6 +59,9 @@ BOOL
 		if (!uMaxRpcSize)
 			uMaxRpcSize = -1;
 
+		if (!pIfCallbackFn)
+			pIfCallbackFn = RpcIfCallbackFn;
+
 		RpcStatus = RpcServerRegisterIf2(
 			RpcIfHandle,
 			ms_pMgrTypeUuid,
@@ -282,8 +285,7 @@ RPC_STATUS
 	CHAR						chServerPrincipalName[MAX_PATH]	= {0};
 	CHAR						chClientPrincipalName[MAX_PATH]	= {0};
 	RPC_CALL_LOCAL_ADDRESS_V1	CallLocalAddress				= {0};
-	CHAR						chBuffer[MAX_PATH]				= {0};	
-
+	CHAR						chBuffer[MAX_PATH]				= {0};
 
 
 	__try
@@ -299,22 +301,19 @@ RPC_STATUS
 
 		RpcCallAttributes.Version = RPC_CALL_ATTRIBUTES_VERSION;
 
- 		RpcCallAttributes.Flags |= RPC_QUERY_SERVER_PRINCIPAL_NAME;
- 		RpcCallAttributes.ServerPrincipalName = (unsigned short *)chServerPrincipalName;
- 		RpcCallAttributes.ServerPrincipalNameBufferLength = sizeof(chServerPrincipalName);
+		RpcCallAttributes.Flags |= RPC_QUERY_SERVER_PRINCIPAL_NAME;
+		RpcCallAttributes.ServerPrincipalName = (unsigned short *)chServerPrincipalName;
+		RpcCallAttributes.ServerPrincipalNameBufferLength = sizeof(chServerPrincipalName);
 
- 		RpcCallAttributes.Flags |= RPC_QUERY_CLIENT_PRINCIPAL_NAME;
- 		RpcCallAttributes.ClientPrincipalName = (unsigned short *)chClientPrincipalName;
- 		RpcCallAttributes.ClientPrincipalNameBufferLength = sizeof(chClientPrincipalName);
- 
-//  	RpcCallAttributes.Flags |= RPC_QUERY_CALL_LOCAL_ADDRESS;
-// 		CallLocalAddress.Version = 1;
-// 		CallLocalAddress.Buffer = chBuffer;
-// 		CallLocalAddress.BufferSize = sizeof(chBuffer);
-// 		CallLocalAddress.AddressFormat = rlafIPv4;
-//  	RpcCallAttributes.CallLocalAddress = &CallLocalAddress;
- 
- 		RpcCallAttributes.Flags |= RPC_QUERY_CLIENT_PID;
+		RpcCallAttributes.Flags |= RPC_QUERY_CLIENT_PRINCIPAL_NAME;
+		RpcCallAttributes.ClientPrincipalName = (unsigned short *)chClientPrincipalName;
+		RpcCallAttributes.ClientPrincipalNameBufferLength = sizeof(chClientPrincipalName);
+
+		RpcCallAttributes.Flags |= RPC_QUERY_CLIENT_PID;
+
+		RpcCallAttributes.Flags |= RPC_QUERY_IS_CLIENT_LOCAL;
+
+		RpcCallAttributes.Flags |= RPC_QUERY_NO_AUTH_REQUIRED;
 
 		RpcStatus = RpcServerInqCallAttributes(ClientBindingHandle, &RpcCallAttributes);
 		if (RPC_S_OK != RpcStatus)

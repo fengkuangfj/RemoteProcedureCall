@@ -4,7 +4,8 @@
 #include "stdafx.h"
 
 
-extern RPC_IF_HANDLE RpcServerInterface_v1_0_s_ifspec;
+extern RPC_IF_HANDLE					RpcServerInterface_v1_0_s_ifspec;
+static RpcServerInterface_v1_0_epv_t	g_MgrEpv							= {0};
 
 
 int _tmain(int argc, _TCHAR* argv[])
@@ -18,16 +19,21 @@ int _tmain(int argc, _TCHAR* argv[])
 	do 
 	{
 		_tcscat_s(tchProtseq, _countof(tchProtseq), RPC_PROT_SEQ);
+
 		_tcscat_s(tchEndpoint, _countof(tchEndpoint), RPC_END_POINT);
+
+		g_MgrEpv.RpcStopServer = RpcStopServer;
+		g_MgrEpv.RpcTest = RpcTest;
+		g_MgrEpv.RpcUseCallback = RpcUseCallback;
 
 		if (!PublicServer.Init(
 			RpcServerInterface_v1_0_s_ifspec,
 			NULL,
-			NULL,
+			&g_MgrEpv,
 			RPC_IF_SEC_NO_CACHE,
 			0,
 			0,
-			CPublicServer::RpcIfCallbackFn,
+			RpcIfCallbackFn,
 			tchProtseq,
 			tchEndpoint,
 			NULL,
