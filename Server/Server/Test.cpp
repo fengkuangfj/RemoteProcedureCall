@@ -47,6 +47,10 @@ RPC_STATUS
 	RPC_CALL_LOCAL_ADDRESS_V1	CallLocalAddress				= {0};
 	CHAR						chBuffer[MAX_PATH]				= {0};
 	PVOID						pInterfaceAddress				= NULL;
+	OS_VER						OsVer							= OS_VER_UNKNOWN;
+	ULONG						ulOpNum							= 0;
+
+	COsVersion					OsVersion;
 
 
 	__try
@@ -56,39 +60,52 @@ RPC_STATUS
 
 		ClientBindingHandle = (RPC_IF_HANDLE)Context;
 
-		RpcStatus = I_RpcBindingInqLocalClientPID(ClientBindingHandle, &uClientPid);
-		if (RPC_S_OK != RpcStatus)
+		OsVer = OsVersion.GetOSVer();
+		if (OS_VER_UNKNOWN == OsVer)
 			__leave;
 
-		RpcCallAttributes.Version = RPC_CALL_ATTRIBUTES_VERSION;
+		if (OS_VER_WINDOWS_XP == OsVer)
+		{
+			RpcStatus = I_RpcBindingInqLocalClientPID(ClientBindingHandle, &uClientPid);
+			if (RPC_S_OK != RpcStatus)
+				__leave;
 
-		RpcCallAttributes.Flags |= RPC_QUERY_SERVER_PRINCIPAL_NAME;
-		RpcCallAttributes.ServerPrincipalName = (unsigned short *)chServerPrincipalName;
-		RpcCallAttributes.ServerPrincipalNameBufferLength = sizeof(chServerPrincipalName);
+			ulOpNum = *(ULONG *)((ULONG_PTR)ClientBindingHandle + 0x134);
+		}
+		else
+		{
+			RpcCallAttributes.Version = RPC_CALL_ATTRIBUTES_VERSION;
 
-		RpcCallAttributes.Flags |= RPC_QUERY_CLIENT_PRINCIPAL_NAME;
-		RpcCallAttributes.ClientPrincipalName = (unsigned short *)chClientPrincipalName;
-		RpcCallAttributes.ClientPrincipalNameBufferLength = sizeof(chClientPrincipalName);
+			RpcCallAttributes.Flags |= RPC_QUERY_SERVER_PRINCIPAL_NAME;
+			RpcCallAttributes.ServerPrincipalName = (unsigned short *)chServerPrincipalName;
+			RpcCallAttributes.ServerPrincipalNameBufferLength = sizeof(chServerPrincipalName);
 
-		RpcCallAttributes.Flags |= RPC_QUERY_CLIENT_PID;
+			RpcCallAttributes.Flags |= RPC_QUERY_CLIENT_PRINCIPAL_NAME;
+			RpcCallAttributes.ClientPrincipalName = (unsigned short *)chClientPrincipalName;
+			RpcCallAttributes.ClientPrincipalNameBufferLength = sizeof(chClientPrincipalName);
 
-		RpcCallAttributes.Flags |= RPC_QUERY_IS_CLIENT_LOCAL;
+			RpcCallAttributes.Flags |= RPC_QUERY_CLIENT_PID;
 
-		RpcCallAttributes.Flags |= RPC_QUERY_NO_AUTH_REQUIRED;
+			RpcCallAttributes.Flags |= RPC_QUERY_IS_CLIENT_LOCAL;
 
-		RpcStatus = RpcServerInqCallAttributes(ClientBindingHandle, &RpcCallAttributes);
-		if (RPC_S_OK != RpcStatus)
-			__leave;
+			RpcCallAttributes.Flags |= RPC_QUERY_NO_AUTH_REQUIRED;
 
-		pInterfaceAddress = (PVOID)*((DWORD_PTR *)&g_MgrEpv + RpcCallAttributes.OpNum);
+			RpcStatus = RpcServerInqCallAttributes(ClientBindingHandle, &RpcCallAttributes);
+			if (RPC_S_OK != RpcStatus)
+				__leave;
+
+			uClientPid = (ULONG)RpcCallAttributes.ClientPID;
+
+			ulOpNum = RpcCallAttributes.OpNum;
+		}
+
+		pInterfaceAddress = (PVOID)*((ULONG_PTR *)&g_MgrEpv + ulOpNum);
 		if (pInterfaceAddress == g_MgrEpv.RpcTest)
-			printf("[%s] RpcTest \n", __FUNCTION__);
+			printf("[%s] %d RpcTest \n", __FUNCTION__, uClientPid);
 		else if (pInterfaceAddress == g_MgrEpv.RpcUseCallback)
-			printf("[%s] RpcUseCallback \n", __FUNCTION__);
+			printf("[%s] %d RpcUseCallback \n", __FUNCTION__, uClientPid);
 		else if (pInterfaceAddress == g_MgrEpv.RpcStopServer)
-			printf("[%s] RpcStopServer \n", __FUNCTION__);
-
-		printf("[%s] %d \n", __FUNCTION__, uClientPid);
+			printf("[%s] %d RpcStopServer \n", __FUNCTION__, uClientPid);
 	}
 	__finally
 	{
