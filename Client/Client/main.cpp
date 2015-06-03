@@ -36,7 +36,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	_getch();
 
-	TestRpcStopServer(TRUE, RpcServerInterface_Binding);
+	TestRpcStopServer(FALSE, RpcServerInterface_Binding);
 
 	PublicClient.Unload(&RpcServerInterface_Binding);
 

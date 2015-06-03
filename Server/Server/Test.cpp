@@ -1,7 +1,7 @@
 #include "stdafx.h"
 
 
-extern RpcServerInterface_v1_0_epv_t g_MgrEpv;
+RpcServerInterface_v1_0_epv_t g_MgrEpv = {0};
 
 
 BOOL
@@ -46,6 +46,7 @@ RPC_STATUS
 	CHAR						chClientPrincipalName[MAX_PATH]	= {0};
 	RPC_CALL_LOCAL_ADDRESS_V1	CallLocalAddress				= {0};
 	CHAR						chBuffer[MAX_PATH]				= {0};
+	PVOID						pInterfaceAddress				= NULL;
 
 
 	__try
@@ -79,7 +80,13 @@ RPC_STATUS
 		if (RPC_S_OK != RpcStatus)
 			__leave;
 
-		g_MgrEpv.RpcTest;
+		pInterfaceAddress = (PVOID)*((DWORD_PTR *)&g_MgrEpv + RpcCallAttributes.OpNum);
+		if (pInterfaceAddress == g_MgrEpv.RpcTest)
+			printf("[%s] RpcTest \n", __FUNCTION__);
+		else if (pInterfaceAddress == g_MgrEpv.RpcUseCallback)
+			printf("[%s] RpcUseCallback \n", __FUNCTION__);
+		else if (pInterfaceAddress == g_MgrEpv.RpcStopServer)
+			printf("[%s] RpcStopServer \n", __FUNCTION__);
 
 		printf("[%s] %d \n", __FUNCTION__, uClientPid);
 	}

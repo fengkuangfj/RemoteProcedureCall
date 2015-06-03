@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Tue Jun 02 22:33:15 2015
+/* at Wed Jun 03 08:58:31 2015
  */
 /* Compiler settings for Server.idl:
     Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 
@@ -136,7 +136,7 @@ RPC_SERVER_STATUS RpcStopServer( void)
 
     _RetVal = NdrClientCall2(
                   ( PMIDL_STUB_DESC  )&RpcServerInterface_StubDesc,
-                  (PFORMAT_STRING) &Server__MIDL_ProcFormatString.Format[102],
+                  (PFORMAT_STRING) &Server__MIDL_ProcFormatString.Format[66],
                   ( unsigned char * )0);
     return ( RPC_SERVER_STATUS  )_RetVal.Simple;
     
@@ -214,57 +214,57 @@ static const Server_MIDL_PROC_FORMAT_STRING Server__MIDL_ProcFormatString =
 /* 64 */	0xd,		/* FC_ENUM16 */
 			0x0,		/* 0 */
 
-	/* Procedure RpcCallback */
+	/* Procedure RpcStopServer */
 
-/* 66 */	0x34,		/* FC_CALLBACK_HANDLE */
+/* 66 */	0x32,		/* FC_BIND_PRIMITIVE */
 			0x48,		/* Old Flags:  */
 /* 68 */	NdrFcLong( 0x0 ),	/* 0 */
-/* 72 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 74 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
+/* 72 */	NdrFcShort( 0x2 ),	/* 2 */
+/* 74 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
 /* 76 */	NdrFcShort( 0x0 ),	/* 0 */
 /* 78 */	NdrFcShort( 0x6 ),	/* 6 */
-/* 80 */	0x46,		/* Oi2 Flags:  clt must size, has return, has ext, */
-			0x2,		/* 2 */
+/* 80 */	0x44,		/* Oi2 Flags:  has return, has ext, */
+			0x1,		/* 1 */
 /* 82 */	0x8,		/* 8 */
 			0x1,		/* Ext Flags:  new corr desc, */
 /* 84 */	NdrFcShort( 0x0 ),	/* 0 */
 /* 86 */	NdrFcShort( 0x0 ),	/* 0 */
 /* 88 */	NdrFcShort( 0x0 ),	/* 0 */
 
-	/* Parameter pch */
-
-/* 90 */	NdrFcShort( 0x10b ),	/* Flags:  must size, must free, in, simple ref, */
-/* 92 */	NdrFcShort( 0x0 ),	/* x86 Stack size/offset = 0 */
-/* 94 */	NdrFcShort( 0x4 ),	/* Type Offset=4 */
-
 	/* Return value */
 
-/* 96 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
-/* 98 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
-/* 100 */	0xd,		/* FC_ENUM16 */
+/* 90 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
+/* 92 */	NdrFcShort( 0x0 ),	/* x86 Stack size/offset = 0 */
+/* 94 */	0xd,		/* FC_ENUM16 */
 			0x0,		/* 0 */
 
-	/* Procedure RpcStopServer */
+	/* Procedure RpcCallback */
 
-/* 102 */	0x32,		/* FC_BIND_PRIMITIVE */
+/* 96 */	0x34,		/* FC_CALLBACK_HANDLE */
 			0x48,		/* Old Flags:  */
-/* 104 */	NdrFcLong( 0x0 ),	/* 0 */
-/* 108 */	NdrFcShort( 0x2 ),	/* 2 */
-/* 110 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
-/* 112 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 114 */	NdrFcShort( 0x6 ),	/* 6 */
-/* 116 */	0x44,		/* Oi2 Flags:  has return, has ext, */
-			0x1,		/* 1 */
-/* 118 */	0x8,		/* 8 */
+/* 98 */	NdrFcLong( 0x0 ),	/* 0 */
+/* 102 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 104 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
+/* 106 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 108 */	NdrFcShort( 0x6 ),	/* 6 */
+/* 110 */	0x46,		/* Oi2 Flags:  clt must size, has return, has ext, */
+			0x2,		/* 2 */
+/* 112 */	0x8,		/* 8 */
 			0x1,		/* Ext Flags:  new corr desc, */
-/* 120 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 122 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 124 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 114 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 116 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 118 */	NdrFcShort( 0x0 ),	/* 0 */
+
+	/* Parameter pch */
+
+/* 120 */	NdrFcShort( 0x10b ),	/* Flags:  must size, must free, in, simple ref, */
+/* 122 */	NdrFcShort( 0x0 ),	/* x86 Stack size/offset = 0 */
+/* 124 */	NdrFcShort( 0x4 ),	/* Type Offset=4 */
 
 	/* Return value */
 
 /* 126 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
-/* 128 */	NdrFcShort( 0x0 ),	/* x86 Stack size/offset = 0 */
+/* 128 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
 /* 130 */	0xd,		/* FC_ENUM16 */
 			0x0,		/* 0 */
 
@@ -291,13 +291,13 @@ static const unsigned short RpcServerInterface_FormatStringOffsetTable[] =
     {
     0,
     36,
-    102
+    66,
     };
 
 
 static const unsigned short _callbackRpcServerInterface_FormatStringOffsetTable[] =
     {
-    66,
+    96
     };
 
 
@@ -338,7 +338,7 @@ static const RPC_DISPATCH_TABLE RpcServerInterface_v1_0_DispatchTable =
 
 static const SERVER_ROUTINE RpcServerInterface_ServerRoutineTable[] = 
     {
-    (SERVER_ROUTINE)RpcCallback,
+    (SERVER_ROUTINE)RpcCallback
     };
 
 static const MIDL_SERVER_INFO RpcServerInterface_ServerInfo = 
