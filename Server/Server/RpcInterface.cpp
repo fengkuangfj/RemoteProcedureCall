@@ -14,7 +14,7 @@ RPC_SERVER_STATUS
 		if (!puch)
 			__leave;
 
-		printf("[%s] %s \n", __FUNCTION__, puch);
+		printf("[%s] %s [current thread]%d \n", __FUNCTION__, puch, GetCurrentThreadId());
 
 		RpcServerStatus = RPC_SERVER_STATUS_SUCCESS;
 	}

@@ -33,13 +33,13 @@
     <ClInclude Include="RpcInterface.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\OsVersion\OsVersion\OsVersion.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Comm\Public.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Test.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Public\OperationSystemVersion\OperationSystemVersion.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -59,10 +59,10 @@
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\OsVersion\OsVersion\OsVersion.cpp">
+    <ClCompile Include="Test.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Test.cpp">
+    <ClCompile Include="..\..\..\Public\OperationSystemVersion\OperationSystemVersion.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

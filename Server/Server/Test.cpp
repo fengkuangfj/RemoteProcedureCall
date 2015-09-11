@@ -50,7 +50,7 @@ RPC_STATUS
 	OS_VER						OsVer							= OS_VER_UNKNOWN;
 	ULONG						ulOpNum							= 0;
 
-	COsVersion					OsVersion;
+	COperationSystemVersion		OsVersion;
 
 
 	__try
@@ -101,11 +101,11 @@ RPC_STATUS
 
 		pInterfaceAddress = (PVOID)*((ULONG_PTR *)&g_MgrEpv + ulOpNum);
 		if (pInterfaceAddress == g_MgrEpv.RpcTest)
-			printf("[%s] %d RpcTest \n", __FUNCTION__, uClientPid);
+			printf("[%s] [client process]%d [current thread]%d RpcTest \n", __FUNCTION__, uClientPid, GetCurrentThreadId());
 		else if (pInterfaceAddress == g_MgrEpv.RpcUseCallback)
-			printf("[%s] %d RpcUseCallback \n", __FUNCTION__, uClientPid);
+			printf("[%s] [client process]%d [current thread]%d RpcUseCallback \n", __FUNCTION__, uClientPid, GetCurrentThreadId());
 		else if (pInterfaceAddress == g_MgrEpv.RpcStopServer)
-			printf("[%s] %d RpcStopServer \n", __FUNCTION__, uClientPid);
+			printf("[%s] [client process]%d [current thread]%d RpcStopServer \n", __FUNCTION__, uClientPid, GetCurrentThreadId());
 	}
 	__finally
 	{

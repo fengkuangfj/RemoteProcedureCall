@@ -41,7 +41,7 @@ BOOL
 	LPRPC_SERVER_LISTEN_INFO	lpRpcServerListenInfo	= {0};
 	HANDLE						hThread					= NULL;
 
-	COsVersion					OsVersion;
+	COperationSystemVersion		OsVersion;
 
 
 	__try

@@ -16,7 +16,7 @@
 #include <Windows.h>
 #include <conio.h>
 
-#include "../../../OsVersion/OsVersion/OsVersion.h"
+#include "../../../Public/OperationSystemVersion/OperationSystemVersion.h"
 #include "../../Comm/Public.h"
 #include "../../Comm/PublicServer.h"
 #include "RpcInterface/server.h"

@@ -14,6 +14,8 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	do 
 	{
+		printf("[%s] [current process]%d [current thread]%d \n", __FUNCTION__, GetCurrentProcessId(), GetCurrentThreadId());
+
 		_tcscat_s(tchProtSeq, _countof(tchProtSeq), RPC_PROT_SEQ);
 		_tcscat_s(tchEndPoint, _countof(tchEndPoint), RPC_END_POINT);
 
@@ -25,6 +27,18 @@ int _tmain(int argc, _TCHAR* argv[])
 			NULL,
 			&RpcServerInterface_Binding
 			))
+			break;
+
+		if (!TestRpcTest())
+			break;
+
+		if (!TestRpcTest())
+			break;
+
+		if (!TestRpcTest())
+			break;
+
+		if (!TestRpcTest())
 			break;
 
 		if (!TestRpcTest())
