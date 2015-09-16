@@ -27,9 +27,6 @@
     <ClInclude Include="..\..\Comm\PublicClient.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Server\Server\RpcInterface\server.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\Comm\Public.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -37,6 +34,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="RpcCallback\RpcCallback.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Server\Server\RpcInterface\Server_h.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -50,13 +50,13 @@
     <ClCompile Include="..\..\Comm\PublicClient.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Server\Server\RpcInterface\server_c.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Test.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="RpcCallback\RpcCallback.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Server\Server\RpcInterface\Server_c.c">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
