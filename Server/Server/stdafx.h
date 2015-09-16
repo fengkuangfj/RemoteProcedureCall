@@ -16,9 +16,9 @@
 #include <Windows.h>
 #include <conio.h>
 
-#include "../../../Public/OperationSystemVersion/OperationSystemVersion.h"
-#include "../../Comm/Public.h"
-#include "../../Comm/PublicServer.h"
-#include "RpcInterface/server.h"
+#include "..\..\..\Public\OperationSystemVersion\OperationSystemVersion.h"
+#include "..\..\Comm\Public.h"
+#include "..\..\Comm\PublicServer.h"
+#include "RpcInterface\server_h.h"
 #include "RpcInterface.h"
 #include "Test.h"

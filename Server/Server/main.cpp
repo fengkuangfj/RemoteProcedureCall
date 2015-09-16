@@ -4,8 +4,7 @@
 #include "stdafx.h"
 
 
-extern RPC_IF_HANDLE					RpcServerInterface_v1_0_s_ifspec;
-extern RpcServerInterface_v1_0_epv_t	g_MgrEpv;
+RpcServerInterface_v1_0_epv_t g_MgrEpv = {0};
 
 
 int _tmain(int argc, _TCHAR* argv[])

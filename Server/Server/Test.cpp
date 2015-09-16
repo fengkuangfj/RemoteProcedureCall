@@ -1,7 +1,7 @@
 #include "stdafx.h"
 
 
-RpcServerInterface_v1_0_epv_t g_MgrEpv = {0};
+extern RpcServerInterface_v1_0_epv_t g_MgrEpv;
 
 
 BOOL

@@ -27,9 +27,6 @@
     <ClInclude Include="..\..\Comm\PublicServer.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="RpcInterface\server.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="RpcInterface.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -40,6 +37,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Public\OperationSystemVersion\OperationSystemVersion.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="RpcInterface\Server_h.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -53,9 +53,6 @@
     <ClCompile Include="..\..\Comm\PublicServer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="RpcInterface\server_s.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -63,6 +60,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Public\OperationSystemVersion\OperationSystemVersion.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="RpcInterface\Server_s.c">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
