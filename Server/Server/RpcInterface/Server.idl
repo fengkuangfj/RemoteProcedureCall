@@ -6,7 +6,12 @@
 interface RpcServerInterface
 {
 cpp_quote("#ifdef MIDL_COMPILE")
+#ifdef UNICODE
 	typedef wchar_t	TCHAR;
+#else
+	typedef char	TCHAR;
+#endif
+
 	typedef TCHAR *	LPTSTR;
 cpp_quote("#endif")
 
