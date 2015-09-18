@@ -97,11 +97,6 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
-    <Midl>
-      <OutputDirectory>..\..\Server\Server\RpcInterface\$(Configuration)\$(Platform)\</OutputDirectory>
-      <AdditionalIncludeDirectories>..\..\Server\Server\RpcInterface\</AdditionalIncludeDirectories>
-      <TargetEnvironment>X64</TargetEnvironment>
-    </Midl>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -115,10 +110,6 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
-    <Midl>
-      <OutputDirectory>..\..\Server\Server\RpcInterface\$(Configuration)\</OutputDirectory>
-      <AdditionalIncludeDirectories>..\..\Server\Server\RpcInterface\</AdditionalIncludeDirectories>
-    </Midl>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -132,18 +123,9 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
-    <Midl>
-      <OutputDirectory>..\..\Server\Server\RpcInterface\$(Configuration)\$(Platform)\</OutputDirectory>
-      <AdditionalIncludeDirectories>..\..\Server\Server\RpcInterface\</AdditionalIncludeDirectories>
-      <TargetEnvironment>X64</TargetEnvironment>
-    </Midl>
   </ItemDefinitionGroup>
   <ItemGroup>
     <Midl Include="..\..\Server\Server\RpcInterface\Server.idl">
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">/use_epv %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/use_epv %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">/use_epv %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">/use_epv %(AdditionalOptions)</AdditionalOptions>
     </Midl>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

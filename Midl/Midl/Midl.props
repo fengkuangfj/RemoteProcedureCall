@@ -6,9 +6,12 @@
   <ItemDefinitionGroup>
     <ClCompile />
     <Midl>
-      <AdditionalOptions>/D "UNICODE" %(AdditionalOptions)</AdditionalOptions>
-      <OutputDirectory>..\..\Server\Server\RpcInterface\$(Configuration)\</OutputDirectory>
+      <AdditionalOptions>/D "UNICODE" /use_epv %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>..\..\Server\Server\RpcInterface\</AdditionalIncludeDirectories>
+      <OutputDirectory Condition="'$(Platform)' == 'Win32'">..\..\Server\Server\RpcInterface\$(Configuration)\</OutputDirectory>
+      <OutputDirectory Condition="'$(Platform)' == 'x64'">..\..\Server\Server\RpcInterface\$(Configuration)\$(Platform)\</OutputDirectory>
+      <TargetEnvironment Condition="'$(Platform)' == 'Win32'">Win32</TargetEnvironment>
+      <TargetEnvironment Condition="'$(Platform)' == 'x64'">X64</TargetEnvironment>
     </Midl>
   </ItemDefinitionGroup>
   <ItemGroup />
