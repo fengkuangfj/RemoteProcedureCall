@@ -87,10 +87,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
-    <Midl>
-      <OutputDirectory>..\..\Server\Server\RpcInterface\$(Configuration)\</OutputDirectory>
-      <AdditionalIncludeDirectories>..\..\Server\Server\RpcInterface\</AdditionalIncludeDirectories>
-    </Midl>
+    <Midl />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>

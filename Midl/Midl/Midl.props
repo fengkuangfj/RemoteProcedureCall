@@ -7,6 +7,8 @@
     <ClCompile />
     <Midl>
       <AdditionalOptions>/D "UNICODE" %(AdditionalOptions)</AdditionalOptions>
+      <OutputDirectory>..\..\Server\Server\RpcInterface\$(Configuration)\</OutputDirectory>
+      <AdditionalIncludeDirectories>..\..\Server\Server\RpcInterface\</AdditionalIncludeDirectories>
     </Midl>
   </ItemDefinitionGroup>
   <ItemGroup />
