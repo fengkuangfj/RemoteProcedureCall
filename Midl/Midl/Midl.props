@@ -6,7 +6,8 @@
   <ItemDefinitionGroup>
     <ClCompile />
     <Midl>
-      <AdditionalOptions>/D "UNICODE" /use_epv %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(CharacterSet)' == 'Unicode'">/D "UNICODE" /use_epv %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(CharacterSet)' == 'MultiByte'">/use_epv %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>..\..\Server\Server\RpcInterface\</AdditionalIncludeDirectories>
       <OutputDirectory Condition="'$(Platform)' == 'Win32'">..\..\Server\Server\RpcInterface\$(Configuration)\</OutputDirectory>
       <OutputDirectory Condition="'$(Platform)' == 'x64'">..\..\Server\Server\RpcInterface\$(Configuration)\$(Platform)\</OutputDirectory>

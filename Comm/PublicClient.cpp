@@ -47,7 +47,7 @@ BOOL
 		if (RPC_S_OK != RpcStatus)
 			__leave;
 
-		RpcStatus = RpcBindingFromStringBinding((RPC_WSTR)ms_lpStringBinding, pRpcBindingHandle);  
+		RpcStatus = RpcBindingFromStringBinding((RPC_WSTR)ms_lpStringBinding, pRpcBindingHandle);
 		if (RPC_S_OK != RpcStatus)
 			__leave;
 
