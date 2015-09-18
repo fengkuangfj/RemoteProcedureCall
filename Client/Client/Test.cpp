@@ -12,7 +12,7 @@ BOOL
 
 	RpcTryExcept
 	{
-		RpcServerStatus = RpcTest((unsigned char *)"form client");
+		RpcServerStatus = RpcTest(_T("form client"));
 		if (RPC_SERVER_STATUS_SUCCESS != RpcServerStatus)
 			__leave;
 

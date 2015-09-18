@@ -85,7 +85,6 @@
     </Link>
     <Midl>
       <OutputDirectory>..\..\Server\Server\RpcInterface\$(Configuration)\</OutputDirectory>
-      <AdditionalOptions>/use_epv %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>..\..\Server\Server\RpcInterface\</AdditionalIncludeDirectories>
     </Midl>
   </ItemDefinitionGroup>
@@ -99,7 +98,6 @@
     </Link>
     <Midl>
       <OutputDirectory>..\..\Server\Server\RpcInterface\$(Configuration)\$(Platform)\</OutputDirectory>
-      <AdditionalOptions>/use_epv %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>..\..\Server\Server\RpcInterface\</AdditionalIncludeDirectories>
       <TargetEnvironment>X64</TargetEnvironment>
     </Midl>
@@ -118,7 +116,6 @@
     </Link>
     <Midl>
       <OutputDirectory>..\..\Server\Server\RpcInterface\$(Configuration)\</OutputDirectory>
-      <AdditionalOptions>/use_epv %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>..\..\Server\Server\RpcInterface\</AdditionalIncludeDirectories>
     </Midl>
   </ItemDefinitionGroup>
@@ -136,13 +133,17 @@
     </Link>
     <Midl>
       <OutputDirectory>..\..\Server\Server\RpcInterface\$(Configuration)\$(Platform)\</OutputDirectory>
-      <AdditionalOptions>/use_epv %(AdditionalOptions)</AdditionalOptions>
       <AdditionalIncludeDirectories>..\..\Server\Server\RpcInterface\</AdditionalIncludeDirectories>
       <TargetEnvironment>X64</TargetEnvironment>
     </Midl>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Midl Include="..\..\Server\Server\RpcInterface\Server.idl" />
+    <Midl Include="..\..\Server\Server\RpcInterface\Server.idl">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">/use_epv %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/use_epv %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">/use_epv %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">/use_epv %(AdditionalOptions)</AdditionalOptions>
+    </Midl>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

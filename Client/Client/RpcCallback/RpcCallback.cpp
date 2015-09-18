@@ -4,7 +4,7 @@
 /* [callback] */
 RPC_SERVER_STATUS
 	RpcCallback(
-	/* [string][in] */ unsigned char *pch
+	/* [string][in] */ LPTSTR lpCh
 	)
 {
 	RPC_SERVER_STATUS RpcServerStatus = RPC_SERVER_STATUS_FAILED;
@@ -12,10 +12,10 @@ RPC_SERVER_STATUS
 
 	__try
 	{
-		if (!pch)
+		if (!lpCh)
 			__leave;
 
-		printf("[%s] %s \n", __FUNCTION__, pch);
+		printf("[%s] %S \n", __FUNCTION__, lpCh);
 
 		RpcServerStatus = RPC_SERVER_STATUS_SUCCESS;
 	}

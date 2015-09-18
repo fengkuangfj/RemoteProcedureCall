@@ -3,7 +3,7 @@
 
 RPC_SERVER_STATUS
 	RpcTest(
-	/* [string][in] */ unsigned char *puch
+	/* [string][in] */ LPTSTR lpCh
 	)
 {
 	RPC_SERVER_STATUS RpcServerStatus = RPC_SERVER_STATUS_FAILED;
@@ -11,10 +11,10 @@ RPC_SERVER_STATUS
 
 	__try
 	{
-		if (!puch)
+		if (!lpCh)
 			__leave;
 
-		printf("[%s] %s [current thread]%d \n", __FUNCTION__, puch, GetCurrentThreadId());
+		printf("[%s] %S [current thread]%d \n", __FUNCTION__, lpCh, GetCurrentThreadId());
 
 		RpcServerStatus = RPC_SERVER_STATUS_SUCCESS;
 	}

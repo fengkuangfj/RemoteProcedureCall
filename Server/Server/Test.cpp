@@ -15,7 +15,7 @@ BOOL
 
 	RpcTryExcept
 	{
-		RpcServerStatus = RpcCallback((unsigned char *)"form server");
+		RpcServerStatus = RpcCallback(_T("from server"));
 		if (RPC_SERVER_STATUS_SUCCESS != RpcServerStatus)
 			__leave;
 
