@@ -36,7 +36,7 @@ int _tmain(int argc, _TCHAR* argv[])
 			NULL,
 			8,
 			0,
-			CRpcServer::RpcMgmtAuthorizationFn
+			CRpcServer::GetInstance()->RpcMgmtAuthorizationFn
 		))
 			break;
 	} while (FALSE);
