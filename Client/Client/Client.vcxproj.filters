@@ -33,10 +33,10 @@
     <ClInclude Include="..\..\Server\Server\RpcInterface\Server_h.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Public\RpcPublic\RpcPublicClient.h">
+    <ClInclude Include="..\..\..\Public\Rpc\RpcClient.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Public\RpcPublic\RpcPublic.h">
+    <ClInclude Include="..\..\..\Public\Rpc\RpcPublic.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -56,7 +56,7 @@
     <ClCompile Include="..\..\Server\Server\RpcInterface\Server_c.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Public\RpcPublic\RpcPublicClient.cpp">
+    <ClCompile Include="..\..\..\Public\Rpc\RpcClient.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

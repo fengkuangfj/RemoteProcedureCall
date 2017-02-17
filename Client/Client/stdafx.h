@@ -16,8 +16,8 @@
 #include <Windows.h>
 #include <conio.h>
 
-#include "..\..\..\Public\RpcPublic\RpcPublic.h"
-#include "..\..\..\Public\RpcPublic\RpcPublicClient.h"
+#include "..\..\..\Public\Rpc\RpcPublic.h"
+#include "..\..\..\Public\Rpc\RpcClient.h"
 #include "..\..\Server\Server\RpcInterface\Server_h.h"
 #include "Test.h"
 #include "RpcCallback/RpcCallback.h"
