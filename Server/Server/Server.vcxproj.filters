@@ -51,10 +51,10 @@
     <ClInclude Include="..\..\..\Public\ModulePath\ModulePath.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Public\RpcPublic\RpcPublicServer.h">
+    <ClInclude Include="..\..\..\Public\Rpc\RpcPublic.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Public\RpcPublic\RpcPublic.h">
+    <ClInclude Include="..\..\..\Public\Rpc\RpcServer.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -89,7 +89,7 @@
     <ClCompile Include="..\..\..\Public\ModulePath\ModulePath.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Public\RpcPublic\RpcPublicServer.cpp">
+    <ClCompile Include="..\..\..\Public\Rpc\RpcServer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

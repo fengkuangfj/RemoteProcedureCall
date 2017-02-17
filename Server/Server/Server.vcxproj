@@ -151,8 +151,8 @@
     <ClInclude Include="..\..\..\Public\PrintfEx\PrintfEx.h" />
     <ClInclude Include="..\..\..\Public\ProcessControl\ProcessControl.h" />
     <ClInclude Include="..\..\..\Public\Public.h" />
-    <ClInclude Include="..\..\..\Public\RpcPublic\RpcPublic.h" />
-    <ClInclude Include="..\..\..\Public\RpcPublic\RpcPublicServer.h" />
+    <ClInclude Include="..\..\..\Public\Rpc\RpcPublic.h" />
+    <ClInclude Include="..\..\..\Public\Rpc\RpcServer.h" />
     <ClInclude Include="..\..\Comm\PublicServer.h" />
     <ClInclude Include="RpcInterface.h" />
     <ClInclude Include="RpcInterface\Server_h.h" />
@@ -191,7 +191,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="..\..\..\Public\RpcPublic\RpcPublicServer.cpp">
+    <ClCompile Include="..\..\..\Public\Rpc\RpcServer.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
