@@ -144,8 +144,8 @@
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\Comm\Public.h" />
-    <ClInclude Include="..\..\Comm\PublicClient.h" />
+    <ClInclude Include="..\..\..\Public\RpcPublic\RpcPublic.h" />
+    <ClInclude Include="..\..\..\Public\RpcPublic\RpcPublicClient.h" />
     <ClInclude Include="..\..\Server\Server\RpcInterface\Server_h.h" />
     <ClInclude Include="RpcCallback\RpcCallback.h" />
     <ClInclude Include="stdafx.h" />
@@ -153,10 +153,10 @@
     <ClInclude Include="Test.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\Comm\PublicClient.cpp">
+    <ClCompile Include="..\..\..\Public\RpcPublic\RpcPublicClient.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\..\Server\Server\RpcInterface\Server_c.c">

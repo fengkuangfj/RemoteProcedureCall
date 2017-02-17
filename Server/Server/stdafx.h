@@ -17,8 +17,8 @@
 #include <conio.h>
 
 #include "..\..\..\Public\OperationSystemVersion\OperationSystemVersion.h"
-#include "..\..\Comm\Public.h"
-#include "..\..\Comm\PublicServer.h"
+#include "..\..\..\Public\RpcPublic\RpcPublic.h"
+#include "..\..\..\Public\RpcPublic\RpcPublicServer.h"
 #include "RpcInterface\server_h.h"
 #include "RpcInterface.h"
 #include "Test.h"

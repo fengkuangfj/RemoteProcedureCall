@@ -30,9 +30,6 @@
     <ClInclude Include="RpcInterface.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\Comm\Public.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Test.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -54,15 +51,18 @@
     <ClInclude Include="..\..\..\Public\ModulePath\ModulePath.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\Public\RpcPublic\RpcPublicServer.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Public\RpcPublic\RpcPublic.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="RpcInterface.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\Comm\PublicServer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
@@ -87,6 +87,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Public\ModulePath\ModulePath.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Public\RpcPublic\RpcPublicServer.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

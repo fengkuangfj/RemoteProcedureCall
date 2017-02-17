@@ -17,8 +17,6 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	do 
 	{
-		COperationSystemVersion::GetInstance();
-
 		_tcscat_s(tchProtseq, _countof(tchProtseq), RPC_PROT_SEQ);
 
 		_tcscat_s(tchEndpoint, _countof(tchEndpoint), RPC_END_POINT);
