@@ -37,11 +37,9 @@ BOOL
 	BOOL						bRet					= FALSE;
 
 	RPC_STATUS					RpcStatus				= RPC_S_OK;
-	OS_VER						OsVer					= OS_VER_UNKNOWN;
+	OS_VERSION_USER_DEFINED		OsVer					= OS_VERSION_UNKNOWN;
 	LPRPC_SERVER_LISTEN_INFO	lpRpcServerListenInfo	= {0};
 	HANDLE						hThread					= NULL;
-
-	COperationSystemVersion		OsVersion;
 
 
 	__try
@@ -96,8 +94,12 @@ BOOL
 		}
 
 		// 4¡¢Listen for client calls
-		OsVer = OsVersion.GetOSVer();
-		if (OS_VER_WINDOWS_XP == OsVer || !uMaxCalls)
+		OsVer = COperationSystemVersion::GetInstance()->GetOSVersion();
+		if (OS_VERSION_WINDOWS_XP == OsVer ||
+			OS_VERSION_WINDOWS_XP_SP1 == OsVer ||
+			OS_VERSION_WINDOWS_XP_SP2 == OsVer ||
+			OS_VERSION_WINDOWS_XP_SP3 == OsVer ||
+			!uMaxCalls)
 			uMaxCalls = RPC_C_LISTEN_MAX_CALLS_DEFAULT;
 
 		if (uMinimumCallThreads >= uMaxCalls)

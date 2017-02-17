@@ -47,10 +47,8 @@ RPC_STATUS
 	RPC_CALL_LOCAL_ADDRESS_V1	CallLocalAddress				= {0};
 	CHAR						chBuffer[MAX_PATH]				= {0};
 	PVOID						pInterfaceAddress				= NULL;
-	OS_VER						OsVer							= OS_VER_UNKNOWN;
+	OS_VERSION_USER_DEFINED		OsVer							= OS_VERSION_UNKNOWN;
 	ULONG						ulOpNum							= 0;
-
-	COperationSystemVersion		OsVersion;
 
 
 	__try
@@ -60,11 +58,14 @@ RPC_STATUS
 
 		ClientBindingHandle = (RPC_IF_HANDLE)Context;
 
-		OsVer = OsVersion.GetOSVer();
-		if (OS_VER_UNKNOWN == OsVer)
+		OsVer = COperationSystemVersion::GetInstance()->GetOSVersion();
+		if (OS_VERSION_UNKNOWN == OsVer)
 			__leave;
 
-		if (OS_VER_WINDOWS_XP == OsVer)
+		if (OS_VERSION_WINDOWS_XP == OsVer ||
+			OS_VERSION_WINDOWS_XP_SP1 == OsVer ||
+			OS_VERSION_WINDOWS_XP_SP2 == OsVer ||
+			OS_VERSION_WINDOWS_XP_SP3 == OsVer)
 		{
 			RpcStatus = I_RpcBindingInqLocalClientPID(ClientBindingHandle, &uClientPid);
 			if (RPC_S_OK != RpcStatus)
