@@ -2,9 +2,9 @@
 
 
 RPC_SERVER_STATUS
-	RpcTest(
+RpcTest(
 	/* [string][in] */ LPTSTR lpCh
-	)
+)
 {
 	RPC_SERVER_STATUS RpcServerStatus = RPC_SERVER_STATUS_FAILED;
 
@@ -27,9 +27,9 @@ RPC_SERVER_STATUS
 }
 
 RPC_SERVER_STATUS
-	RpcUseCallback(
+RpcUseCallback(
 	void
-	)
+)
 {
 	RPC_SERVER_STATUS RpcServerStatus = RPC_SERVER_STATUS_FAILED;
 
@@ -50,18 +50,16 @@ RPC_SERVER_STATUS
 }
 
 RPC_SERVER_STATUS
-	RpcStopServer(
+RpcStopServer(
 	void
-	)
+)
 {
 	RPC_SERVER_STATUS	RpcServerStatus = RPC_SERVER_STATUS_FAILED;
 
-	CPublicServer		PublicServer;
 
-
-	do 
+	do
 	{
-		if (!PublicServer.Unload(TRUE))
+		if (!CRpcServer::GetInstance()->Unload(TRUE))
 			break;
 
 		RpcServerStatus = RPC_SERVER_STATUS_SUCCESS;

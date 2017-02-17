@@ -6,27 +6,25 @@
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	CPublicClient	PublicClient;
-
-	TCHAR			tchProtSeq[MAX_PATH]	= {0};
-	TCHAR			tchEndPoint[MAX_PATH]	= {0};
+	TCHAR			tchProtSeq[MAX_PATH] = { 0 };
+	TCHAR			tchEndPoint[MAX_PATH] = { 0 };
 
 
-	do 
+	do
 	{
 		printf("[%s] [current process]%d [current thread]%d \n", __FUNCTION__, GetCurrentProcessId(), GetCurrentThreadId());
 
 		_tcscat_s(tchProtSeq, _countof(tchProtSeq), RPC_PROT_SEQ);
 		_tcscat_s(tchEndPoint, _countof(tchEndPoint), RPC_END_POINT);
 
-		if (!PublicClient.Init(
+		if (!CRpcClient::GetInstance(
 			NULL,
 			tchProtSeq,
 			NULL,
 			tchEndPoint,
 			NULL,
 			&RpcServerInterface_Binding
-			))
+		))
 			break;
 
 		if (!TestRpcTest())
@@ -52,7 +50,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	TestRpcStopServer(FALSE, RpcServerInterface_Binding);
 
-	PublicClient.Unload(&RpcServerInterface_Binding);
+	CRpcClient::ReleaseInstance();
 
 	return 0;
 }

@@ -4,18 +4,16 @@
 #include "stdafx.h"
 
 
-RpcServerInterface_v1_0_epv_t g_MgrEpv = {0};
+RpcServerInterface_v1_0_epv_t g_MgrEpv = { 0 };
 
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	CPublicServer	PublicServer;
-
-	TCHAR			tchProtseq[MAX_PATH]	= {0};
-	TCHAR			tchEndpoint[MAX_PATH]	= {0};
+	TCHAR			tchProtseq[MAX_PATH] = { 0 };
+	TCHAR			tchEndpoint[MAX_PATH] = { 0 };
 
 
-	do 
+	do
 	{
 		_tcscat_s(tchProtseq, _countof(tchProtseq), RPC_PROT_SEQ);
 
@@ -25,7 +23,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		g_MgrEpv.RpcTest = RpcTest;
 		g_MgrEpv.RpcUseCallback = RpcUseCallback;
 
-		if (!PublicServer.Init(
+		if (!CRpcServer::GetInstance(
 			RpcServerInterface_v1_0_s_ifspec,
 			NULL,
 			&g_MgrEpv,
@@ -38,14 +36,14 @@ int _tmain(int argc, _TCHAR* argv[])
 			NULL,
 			8,
 			0,
-			CPublicServer::RpcMgmtAuthorizationFn
-			))
+			CRpcServer::RpcMgmtAuthorizationFn
+		))
 			break;
 	} while (FALSE);
 
 	_getch();
 
-	PublicServer.Unload(FALSE);
+	CRpcServer::ReleaseInstance();
 	COperationSystemVersion::ReleaseInstance();
 
 	return 0;
